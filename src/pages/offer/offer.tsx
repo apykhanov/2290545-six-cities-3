@@ -1,6 +1,6 @@
-import {Link} from 'react-router-dom';
+import Logo from '../../components/logo/logo.tsx';
 
-export default function offer() {
+export default function Offer() {
 
   return (
     <div className="page">
@@ -8,15 +8,7 @@ export default function offer() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to="/main">
-                <img
-                  className="header__logo"
-                  src="/img/logo.svg"
-                  alt="6 cities logo"
-                  width={81}
-                  height={41}
-                />
-              </Link>
+              <Logo />
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
