@@ -1,5 +1,3 @@
-import {Link} from "react-router-dom";
-
 export default function  Card()  {
 
   return (
@@ -8,9 +6,9 @@ export default function  Card()  {
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to="#">
+        <a href="#">
           <img className="place-card__image" src="/img/apartment-01.jpg" width="260" height="200" alt="Place image"/>
-        </Link>
+        </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -32,11 +30,12 @@ export default function  Card()  {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to="#">Beautiful &amp; luxurious apartment at great location</Link>
+          <a href="#">Beautiful &amp; luxurious apartment at great location</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
     </article>
   )
 }
+
 

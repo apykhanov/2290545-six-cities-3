@@ -1,5 +1,3 @@
-import {Link} from "react-router-dom";
-
 export default function Favorites() {
 
   return (
@@ -8,7 +6,7 @@ export default function Favorites() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to="/main">
+              <a className="header__logo-link" href="main.html">
                 <img
                   className="header__logo"
                   src="/img/logo.svg"
@@ -16,7 +14,7 @@ export default function Favorites() {
                   width={81}
                   height={41}
                 />
-              </Link>
+              </a>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -215,7 +213,7 @@ export default function Favorites() {
         </div>
       </main>
       <footer className="footer container">
-        <Link to="/main">
+        <a className="footer__logo-link" href="main.html">
           <img
             className="footer__logo"
             src="/img/logo.svg"
@@ -223,7 +221,7 @@ export default function Favorites() {
             width={64}
             height={33}
           />
-        </Link>
+        </a>
       </footer>
     </div>
   )
