@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 export default function offer() {
 
   return (
@@ -6,15 +8,15 @@ export default function offer() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link to="/main">
                 <img
                   className="header__logo"
-                  src="img/logo.svg"
+                  src="/img/logo.svg"
                   alt="6 cities logo"
                   width={81}
                   height={41}
                 />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -47,42 +49,42 @@ export default function offer() {
               <div className="offer__image-wrapper">
                 <img
                   className="offer__image"
-                  src="img/room.jpg"
+                  src="/img/room.jpg"
                   alt="Photo studio"
                 />
               </div>
               <div className="offer__image-wrapper">
                 <img
                   className="offer__image"
-                  src="img/apartment-01.jpg"
+                  src="/img/apartment-01.jpg"
                   alt="Photo studio"
                 />
               </div>
               <div className="offer__image-wrapper">
                 <img
                   className="offer__image"
-                  src="img/apartment-02.jpg"
+                  src="/img/apartment-02.jpg"
                   alt="Photo studio"
                 />
               </div>
               <div className="offer__image-wrapper">
                 <img
                   className="offer__image"
-                  src="img/apartment-03.jpg"
+                  src="/img/apartment-03.jpg"
                   alt="Photo studio"
                 />
               </div>
               <div className="offer__image-wrapper">
                 <img
                   className="offer__image"
-                  src="img/studio-01.jpg"
+                  src="/img/studio-01.jpg"
                   alt="Photo studio"
                 />
               </div>
               <div className="offer__image-wrapper">
                 <img
                   className="offer__image"
-                  src="img/apartment-01.jpg"
+                  src="/img/apartment-01.jpg"
                   alt="Photo studio"
                 />
               </div>
@@ -145,7 +147,7 @@ export default function offer() {
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src="img/avatar-angelina.jpg"
+                      src="/img/avatar-angelina.jpg"
                       width={74}
                       height={74}
                       alt="Host avatar"
@@ -177,7 +179,7 @@ export default function offer() {
                       <div className="reviews__avatar-wrapper user__avatar-wrapper">
                         <img
                           className="reviews__avatar user__avatar"
-                          src="img/avatar-max.jpg"
+                          src="/img/avatar-max.jpg"
                           width={54}
                           height={54}
                           alt="Reviews avatar"
@@ -328,7 +330,7 @@ export default function offer() {
                   <a href="#">
                     <img
                       className="place-card__image"
-                      src="img/room.jpg"
+                      src="/img/room.jpg"
                       width={260}
                       height={200}
                       alt="Place image"
@@ -372,7 +374,7 @@ export default function offer() {
                   <a href="#">
                     <img
                       className="place-card__image"
-                      src="img/apartment-02.jpg"
+                      src="/img/apartment-02.jpg"
                       width={260}
                       height={200}
                       alt="Place image"
@@ -419,7 +421,7 @@ export default function offer() {
                   <a href="#">
                     <img
                       className="place-card__image"
-                      src="img/apartment-03.jpg"
+                      src="/img/apartment-03.jpg"
                       width={260}
                       height={200}
                       alt="Place image"
