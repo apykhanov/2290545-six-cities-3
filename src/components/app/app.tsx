@@ -1,4 +1,4 @@
-import Main from "../../pages/main/main.tsx";
+import Main from '../../pages/main/main.tsx';
 
 
 type AppProps = {
@@ -9,6 +9,6 @@ export default function App({ cardCount }: AppProps) {
 
   return (
     <Main cardCount={cardCount} />
-  )
+  );
 }
 

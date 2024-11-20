@@ -224,6 +224,6 @@ export default function Favorites() {
         </a>
       </footer>
     </div>
-  )
+  );
 }
 

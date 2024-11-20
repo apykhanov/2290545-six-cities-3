@@ -1,11 +1,11 @@
-import Card from "../../components/card/card.tsx";
+import Card from '../../components/card/card.tsx';
 
 export const Setting = {
   cardCount: 6,
-}
+};
 
 type MainProps = {
-  cardCount: number
+  cardCount: number;
 }
 
 
@@ -113,7 +113,7 @@ export default function Main({cardCount}: MainProps) {
         </div>
       </main>
     </div>
-  )
+  );
 }
 
 

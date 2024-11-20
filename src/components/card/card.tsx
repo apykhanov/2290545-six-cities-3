@@ -1,4 +1,4 @@
-export default function  Card()  {
+export default function Card() {
 
   return (
     <article className="cities__card place-card">
@@ -35,7 +35,7 @@ export default function  Card()  {
         <p className="place-card__type">Apartment</p>
       </div>
     </article>
-  )
+  );
 }
 
 
