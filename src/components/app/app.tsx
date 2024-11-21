@@ -4,7 +4,8 @@ import Login from '../../pages/login/login.tsx';
 import NotFound from '../../pages/notfound/notFound.tsx';
 import Offer from '../../pages/offer/offer.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
+import {AppRoute, AuthorizationStatus} from '../../const.ts';
+import PrivateRoute from '../private-route/private-route.tsx';
 
 
 type AppProps = {
@@ -30,7 +31,13 @@ export default function App({cardCount}: AppProps) {
         />
         <Route
           path={AppRoute.Favorites}
-          element={<Favorites/>}
+          element={
+            <PrivateRoute
+              authorizationStatus={AuthorizationStatus.NoAuth}
+            >
+              <Favorites />
+            </PrivateRoute>
+          }
         />
         <Route
           path="*"
