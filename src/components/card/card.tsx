@@ -33,7 +33,7 @@ export default function Card() {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to="/offer/:id">Beautiful &amp; luxurious apartment at great location</Link>
+          <Link to={AppRoute.Offer}>Beautiful &amp; luxurious apartment at great location</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
