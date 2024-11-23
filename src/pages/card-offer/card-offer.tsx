@@ -5,16 +5,16 @@ import {AppRoute} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
 
 type CardOfferProps = {
-  offers: Offer[];
+  offers: Offer;
 }
 
 export default function CardOffer({offers}: CardOfferProps) {
-  const {images, description, name} = offers;
-  const {offerId} = useParams();
-  const offer = offers.find((item) => item.id === offerId);
-  if (!offer) {
-    return <Navigate to={AppRoute.NotFound} />;
-  }
+  const {images, description, name} = offer;
+  // const {offerId} = useParams();
+  // const offer = offers.find((item) => item.id === offerId);
+  // if (!offer) {
+  //   return <Navigate to={AppRoute.NotFound} />;
+  // }
   return (
     <div className="page">
       <header className="header">
