@@ -12,8 +12,8 @@ import {Review} from '../../types/review.ts';
 
 type AppProps = {
   offers: OfferPreview[];
-  reviews: Review[];
-  cardOffer: OfferDetail[];
+  reviews: Review;
+  cardOffer: OfferDetail;
 }
 
 export default function App({offers, reviews, cardOffer}: AppProps) {

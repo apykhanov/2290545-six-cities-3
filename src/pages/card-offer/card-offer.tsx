@@ -4,7 +4,7 @@ import {housing} from '../../const.ts';
 import {OfferDetail, OfferPreview} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
 import {Review} from '../../types/review.ts';
-import FavoriteCard from '../../components/favorite-card/favorite-card.tsx';
+import Card from '../../components/card/card.tsx';
 
 type CardOfferProps = {
   cardOffer: OfferDetail;
@@ -161,7 +161,7 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
             </h2>
             <div className="near-places__list places__list">
               {offers.map((offer) => (
-                <FavoriteCard key={offer.id} offer={offer}/>
+                <Card key={offer.id} offer={offer}/>
               ))}
             </div>
           </section>

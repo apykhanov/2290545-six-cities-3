@@ -49,6 +49,7 @@ export default function Card({offer, onMouseOver}: CardProps) {
         <p className="place-card__type">{housing[type]}</p>
       </div>
     </article>
+
   );
 }
 
