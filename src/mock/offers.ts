@@ -1,6 +1,6 @@
-import {Offer} from '../types/offer';
+import {OfferPreview} from '../types/offer.ts';
 
-export const offersMock: Offer[] = [
+export const offersMock: OfferPreview[] = [
   {
     'id': 'fb359079-7d6b-4f31-92df-26481bbd3792',
     'title': 'Loft Studio in the Central Area',

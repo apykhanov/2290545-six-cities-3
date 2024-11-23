@@ -1,7 +1,8 @@
-import {CardOffer} from '../types/card-offer.ts';
+import {OfferDetail} from '../types/offer.ts';
 
-export const cardOffersMock: CardOffer[] = [
+export const cardOffersMock: OfferDetail =[
   {
+
     'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
     'title': 'Beautiful & luxurious studio at great location',
     'type': 'apartment',
@@ -22,7 +23,6 @@ export const cardOffersMock: CardOffer[] = [
     'isFavorite': false,
     'isPremium': false,
     'rating': 4,
-    'previewImage': 'https://url-to-image/image.png',
     'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     'bedrooms': 3,
     'goods': [
@@ -37,5 +37,6 @@ export const cardOffersMock: CardOffer[] = [
       'https://url-to-image/image.png'
     ],
     'maxAdults': 4
-  }
-];
+  };
+]
+

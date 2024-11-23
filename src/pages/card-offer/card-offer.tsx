@@ -2,14 +2,13 @@ import Header from '../../components/header/header.tsx';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import {Navigate, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
-import {Offer} from '../../types/offer.ts';
+import {OfferDetail} from '../../types/offer.ts';
 
 type CardOfferProps = {
-  offers: Offer;
+  cardOffer: OfferDetail[];
 }
 
-export default function CardOffer({offers}: CardOfferProps) {
-  const {images, description, name} = offers;
+export default function CardOffer({cardOffer}: CardOfferProps) {
   const {offerId} = useParams();
   const offer = offers.find((item) => item.id === offerId);
   if (!offer) {

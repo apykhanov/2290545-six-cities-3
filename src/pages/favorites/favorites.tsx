@@ -1,15 +1,15 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 import Header from '../../components/header/header.tsx';
-import {Offer} from '../../types/offer.ts';
+import {OfferPreview} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
 
 type FavoriteProps = {
-  offers: Offer[];
+  offers: OfferPreview[];
 };
 
 export default function Favorites({offers}: FavoriteProps) {
-  const {previewImage, title, type, rating, price} = offer;
+
   return (
     <div className="page">
       <header className="header">

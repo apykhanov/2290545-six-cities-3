@@ -6,16 +6,17 @@ import CardOffer from '../../pages/card-offer/card-offer.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import PrivateRoute from '../private-route/private-route.tsx';
-import {Offer} from '../../types/offer.ts';
-import {CardOffer} from '../../types/card-offer.ts';
+import {OfferDetail, OfferPreview} from '../../types/offer.ts';
+import {Review} from '../../types/review.ts';
 
 
 type AppProps = {
-  offers: Offer[];
-  reviews: CardOffer[];
+  offers: OfferPreview[];
+  reviews: Review[];
+  cardOffer: OfferDetail[];
 }
 
-export default function App({offers, reviews}: AppProps) {
+export default function App({offers, reviews, cardOffer}: AppProps) {
 
   return (
     <BrowserRouter>
@@ -26,7 +27,7 @@ export default function App({offers, reviews}: AppProps) {
         />
         <Route
           path={`${AppRoute.cardOffer}/:offerId`}
-          element={<CardOffer offers={offers} />}
+          element={<CardOffer cardoffer={cardOffer} />}
         />
         <Route
           path={AppRoute.Login}
