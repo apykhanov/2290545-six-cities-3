@@ -1,10 +1,11 @@
 import Header from '../../components/header/header.tsx';
 import ReviewForm from '../../components/review-form/review-form.tsx';
-import {housing} from '../../const.ts';
+import {AppRoute, housing} from '../../const.ts';
 import {OfferDetail, OfferPreview} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
 import {Review} from '../../types/review.ts';
 import Card from '../../components/card/card.tsx';
+import {Navigate, useParams} from 'react-router-dom';
 
 type CardOfferProps = {
   cardOffer: OfferDetail;
@@ -16,11 +17,11 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
   const {images, description, title, rating, type, price,host,
     bedrooms, maxAdults} = cardOffer;
   const {user} = review;
-  // const {offerId} = useParams();
-  // const offer = offers.find((item) => item.id === offerId);
-  // if (!offer) {
-  //   return <Navigate to={AppRoute.NotFound} />;
-  // }
+  const {offerId} = useParams();
+  const offer = offers.find((item) => item.id === offerId);
+  if (!offer) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
   return (
     <div className="page">
       <header className="header">
@@ -101,14 +102,10 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the
-                    unique lightness of Amsterdam. The building is green and from
-                    18th century.
+                    {description}
                   </p>
                   <p className="offer__text">
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
+                    {description}
                   </p>
                 </div>
               </div>
