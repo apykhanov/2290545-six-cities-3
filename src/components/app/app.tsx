@@ -7,12 +7,12 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import PrivateRoute from '../private-route/private-route.tsx';
 import {Offer} from '../../types/offer.ts';
-import {Review} from '../../types/review.ts';
+import {CardOffer} from '../../types/card-offer.ts';
 
 
 type AppProps = {
   offers: Offer[];
-  reviews: Review[];
+  reviews: CardOffer[];
 }
 
 export default function App({offers, reviews}: AppProps) {
