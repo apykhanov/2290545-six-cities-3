@@ -1,10 +1,10 @@
 import {Link} from 'react-router-dom';
 import {AppRoute, housing} from '../../const.ts';
-import {Offer} from '../../types/offer.ts';
+import {OfferPreview} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
 
 type CardProps = {
-  offer: Offer;
+  offer: OfferPreview;
   onMouseOver?: (evt: MouseEvent) => void;
 };
 

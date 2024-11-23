@@ -1,9 +1,9 @@
 import Card from '../card/card.tsx';
-import {Offer} from '../../types/offer.ts';
+import {OfferPreview} from '../../types/offer.ts';
 import {useState} from 'react';
 
 type CardListProps = {
-  offers: Offer[];
+  offers: OfferPreview[];
   onMouseOver?: (evt: MouseEvent) => void;
 };
 
