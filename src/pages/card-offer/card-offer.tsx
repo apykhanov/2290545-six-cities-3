@@ -8,15 +8,15 @@ import Card from '../../components/card/card.tsx';
 import {Navigate, useParams} from 'react-router-dom';
 
 type CardOfferProps = {
-  cardOffer: OfferDetail;
+  cardOffers: OfferDetail;
   review: Review;
   offers: OfferPreview[];
 }
 
-export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
+export default function CardOffer({cardOffers, review, offers}: CardOfferProps) {
   const {images, description, title, rating, type, price,host,
-    bedrooms, maxAdults} = cardOffer;
-  const {user} = review;
+    bedrooms, maxAdults} = cardOffers;
+  const {user, comment} = review;
   const {offerId} = useParams();
   const offer = offers.find((item) => item.id === offerId);
   if (!offer) {
@@ -135,9 +135,7 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
                         </div>
                       </div>
                       <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by
-                        the unique lightness of Amsterdam. The building is green and
-                        from 18th century.
+                        {comment}
                       </p>
                       <time className="reviews__time" dateTime="2019-04-24">
                         April 2019

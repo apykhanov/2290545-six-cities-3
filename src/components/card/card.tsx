@@ -19,7 +19,8 @@ export default function Card({offer, onMouseOver}: CardProps) {
         <Link to={AppRoute.cardOffer}>
           <img className="place-card__image"
             src={previewImage}
-            width="260" height="200"
+            width="260"
+            height="200"
             alt="Place image"
           />
         </Link>

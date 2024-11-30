@@ -23,7 +23,7 @@ export const housing: Record<string, string> = {
   hotel: 'Hotel'
 };
 
-export const RATING_STARS_STYLE_KOEF = 20;
+export const MAX_STARS_RATING = 20;
 
 export const MAX_COMMENTS_LENGTH = 140;
 export const MIN_COMMENTS_LENGTH = 50;

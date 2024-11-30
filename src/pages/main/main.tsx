@@ -3,11 +3,11 @@ import CardList from '../../components/card-list/card-list.tsx';
 import CitiesMap from '../../components/cities-map/cities-map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
-import {Offer} from '../../types/offer.ts';
+import {OfferPreview} from '../../types/offer.ts';
 
 
 type MainProps = {
-  offers: Offer[];
+  offers: OfferPreview[];
 }
 
 export default function Main({offers}: MainProps) {
