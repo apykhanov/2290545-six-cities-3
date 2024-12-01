@@ -8,14 +8,14 @@ import Card from '../../components/card/card.tsx';
 import {Navigate, useParams} from 'react-router-dom';
 
 type CardOfferProps = {
-  cardOffers: OfferDetail;
+  cardOffer: OfferDetail;
   review: Review;
   offers: OfferPreview[];
 }
 
-export default function CardOffer({cardOffers, review, offers}: CardOfferProps) {
-  const {images, description, title, rating, type, price,host,
-    bedrooms, maxAdults} = cardOffers;
+export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
+  const { images, description, title, rating, type, price, host,
+    bedrooms, maxAdults} = cardOffer;
   const {user, comment} = review;
   const {offerId} = useParams();
   const offer = offers.find((item) => item.id === offerId);

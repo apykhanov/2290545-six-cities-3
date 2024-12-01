@@ -12,11 +12,11 @@ import {Review} from '../../types/review.ts';
 
 type AppProps = {
   offers: OfferPreview[];
-  reviews: Review[];
-  cardOffers: OfferDetail[];
+  review: Review;
+  cardOffer: OfferDetail;
 }
 
-export default function App({offers, reviews, cardOffers}: AppProps) {
+export default function App({offers, review, cardOffer}: AppProps) {
 
   return (
     <BrowserRouter>
@@ -27,7 +27,7 @@ export default function App({offers, reviews, cardOffers}: AppProps) {
         />
         <Route
           path={`${AppRoute.cardOffer}/:offerId`}
-          element={<CardOffer cardOffers={cardOffers} reviews={reviews} offers={offers} />}
+          element={<CardOffer cardOffer={cardOffer} review={review} offers={offers} />}
         />
         <Route
           path={AppRoute.Login}

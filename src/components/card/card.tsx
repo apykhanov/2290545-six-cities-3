@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom';
 import {AppRoute, housing} from '../../const.ts';
 import {OfferPreview} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
+import {MouseEvent} from 'react';
+
 
 type CardProps = {
   offer: OfferPreview;
