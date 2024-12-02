@@ -5,7 +5,6 @@ import {useState} from 'react';
 
 type CardListProps = {
   offers: OfferPreview[];
-  onMouseOver?: (evt: MouseEvent) => void;
 };
 
 export default function CardList({offers}: CardListProps) {
