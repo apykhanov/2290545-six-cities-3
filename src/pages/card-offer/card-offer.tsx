@@ -159,7 +159,7 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
                   <a href="#">
                     <img
                       className="place-card__image"
-                      src="img/room.jpg"
+                      src="/img/room.jpg"
                       width={260}
                       height={200}
                       alt="Place image"
@@ -203,7 +203,7 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
                   <a href="#">
                     <img
                       className="place-card__image"
-                      src="img/apartment-02.jpg"
+                      src="/img/apartment-02.jpg"
                       width={260}
                       height={200}
                       alt="Place image"
@@ -250,7 +250,7 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
                   <a href="#">
                     <img
                       className="place-card__image"
-                      src="img/apartment-03.jpg"
+                      src="/img/apartment-03.jpg"
                       width={260}
                       height={200}
                       alt="Place image"
