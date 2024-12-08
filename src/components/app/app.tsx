@@ -2,28 +2,32 @@ import Main from '../../pages/main/main.tsx';
 import Favorites from '../../pages/favorites/favorites.tsx';
 import Login from '../../pages/login/login.tsx';
 import NotFound from '../../pages/notfound/notFound.tsx';
-import Offer from '../../pages/offer/offer.tsx';
+import CardOffer from '../../pages/card-offer/card-offer.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import PrivateRoute from '../private-route/private-route.tsx';
+import {OfferDetail, OfferPreview} from '../../types/offer.ts';
+import {Review} from '../../types/review.ts';
 
 
 type AppProps = {
-  cardCount: number;
+  offers: OfferPreview[];
+  reviews: Review[];
+  cardOffers: OfferDetail[];
 }
 
-export default function App({cardCount}: AppProps) {
+export default function App({offers, reviews, cardOffers}: AppProps) {
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<Main cardCount={cardCount} />}
+          element={<Main offers={offers} />}
         />
         <Route
-          path={AppRoute.Offer}
-          element={<Offer />}
+          path={`${AppRoute.cardOffer}/:id`}
+          element={<CardOffer offers={offers} cardOffer={cardOffers} reviews={reviews} />}
         />
         <Route
           path={AppRoute.Login}
@@ -33,9 +37,9 @@ export default function App({cardCount}: AppProps) {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <Favorites />
+              <Favorites offers={offers} />
             </PrivateRoute>
           }
         />
