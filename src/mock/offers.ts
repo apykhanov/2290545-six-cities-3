@@ -71,7 +71,7 @@ export const offersMock: OfferPreview[] = [
     'rating': 4.8
   },
   {
-    'id': '4a3da1a8-679c-49d7-97c3-f4973c78bf16',
+    'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
     'title': 'House in countryside',
     'type': 'house',
     'price': 678,

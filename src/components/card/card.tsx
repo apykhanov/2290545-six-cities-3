@@ -11,14 +11,14 @@ type CardProps = {
 };
 
 export default function Card({offer, onMouseOver}: CardProps) {
-  const {previewImage, title, type, rating, price} = offer;
+  const {previewImage, title, type, rating, price, id} = offer;
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper" onMouseOver={onMouseOver}>
-        <Link to={AppRoute.cardOffer}>
+        <Link to={`${AppRoute.cardOffer}/${id}`}>
           <img className="place-card__image"
             src={previewImage}
             width="260"

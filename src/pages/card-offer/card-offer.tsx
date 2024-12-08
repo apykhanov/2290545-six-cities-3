@@ -1,26 +1,29 @@
 import Header from '../../components/header/header.tsx';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import {AppRoute, housing} from '../../const.ts';
-import {OfferDetail, OfferPreview} from '../../types/offer.ts';
+import {OfferDetail} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
-import {Review} from '../../types/review.ts';
 import {Navigate, useParams} from 'react-router-dom';
+import {Review} from '../../types/review.ts';
+import {ReviewItem} from '../../components/review-item/review-item.tsx';
 
 type CardOfferProps = {
-  cardOffer: OfferDetail;
-  review: Review;
-  offers: OfferPreview[];
+  cardOffer: OfferDetail[];
+  reviews: Review[];
 }
 
-export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
-  const { images, description, title, rating, type, price, host,
-    bedrooms, maxAdults} = cardOffer;
-  const {user, comment} = review;
-  const {offerId} = useParams();
-  const offer = offers.find((item) => item.id === offerId);
+export default function CardOffer({cardOffer, reviews}: CardOfferProps) {
+
+  const {id} = useParams();
+  const offer = cardOffer.find((item) => item.id === id);
   if (!offer) {
     return <Navigate to={AppRoute.NotFound} />;
   }
+
+  const {images, description, title, rating, type, price, host,
+    bedrooms, maxAdults, goods} = offer;
+
+
   return (
     <div className="page">
       <header className="header">
@@ -34,7 +37,7 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
             <div className="offer__gallery">
               {images.slice(0, 6).map((image) => (
                 <div className="offer__image-wrapper" key={image}>
-                  <img className="offer__image" src={image} alt={description}/>
+                  <img className="offer__image" src={image} alt="Photo studio"/>
                 </div>
               ))}
             </div>
@@ -70,18 +73,11 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
-                <h2 className="offer__inside-title">What&apos;sinside</h2>
+                <h2 className="offer__inside-title">What&apos;inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">Wi-Fi</li>
-                  <li className="offer__inside-item">Washing machine</li>
-                  <li className="offer__inside-item">Towels</li>
-                  <li className="offer__inside-item">Heating</li>
-                  <li className="offer__inside-item">Coffee machine</li>
-                  <li className="offer__inside-item">Baby seat</li>
-                  <li className="offer__inside-item">Kitchen</li>
-                  <li className="offer__inside-item">Dishwasher</li>
-                  <li className="offer__inside-item">Cabel TV</li>
-                  <li className="offer__inside-item">Fridge</li>
+                  {goods.map((good) => (
+                    <li key={good} className="offer__inside-item">{goods}</li>
+                  ))}
                 </ul>
               </div>
               <div className="offer__host">
@@ -103,44 +99,16 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
                   <p className="offer__text">
                     {description}
                   </p>
-                  <p className="offer__text">
-                    {description}
-                  </p>
                 </div>
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">1</span>
+                  Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img
-                          className="reviews__avatar user__avatar"
-                          src={user.avatarUrl}
-                          width={54}
-                          height={54}
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">{user.name}</span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: getRatingStarsStyle(rating)}}/>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        {comment}
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">
-                        April 2019
-                      </time>
-                    </div>
-                  </li>
+                  {reviews.map((review) => (
+                    <ReviewItem review={review} key={review.id} />
+                  ))}
                 </ul>
                 <ReviewForm/>
               </section>
@@ -237,7 +205,7 @@ export default function CardOffer({cardOffer, review, offers}: CardOfferProps) {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Canal View Prinsengracht</a>
+                    <a href="#">Canal View Prizefighting</a>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>

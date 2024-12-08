@@ -1,4 +1,4 @@
-import Sort from '../../components/sort/sort.t.tsx';
+import Sort from '../../components/sort/sort.tsx';
 import CardList from '../../components/card-list/card-list.tsx';
 import CitiesMap from '../../components/cities-map/cities-map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
