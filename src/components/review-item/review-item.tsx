@@ -5,7 +5,7 @@ type ReviewItemProps = {
   review: Review;
 };
 
-export function ReviewItem({ review }: ReviewItemProps): JSX.Element {
+export function ReviewItem({review}: ReviewItemProps): JSX.Element {
   const {user, comment, rating} = review;
   return (
     <li className="reviews__item">
@@ -31,8 +31,8 @@ export function ReviewItem({ review }: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">
-        April 2019
+        <time className="reviews__time" dateTime={review.date}>
+          {review.date}
         </time>
       </div>
     </li>

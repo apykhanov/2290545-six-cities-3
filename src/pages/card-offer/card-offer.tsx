@@ -80,7 +80,7 @@ export default function CardOffer({cardOffer, reviews, offers}: CardOfferProps) 
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;inside</h2>
                 <ul className="offer__inside-list">
-                  {goods.map((good) => (
+                  {goods.slice(0, 1).map((good) => (
                     <li key={good} className="offer__inside-item">{goods}</li>
                   ))}
                 </ul>
