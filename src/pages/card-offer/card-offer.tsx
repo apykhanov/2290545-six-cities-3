@@ -8,6 +8,9 @@ import {Review} from '../../types/review.ts';
 import {ReviewItem} from '../../components/review-item/review-item.tsx';
 import Card from '../../components/card/card.tsx';
 
+const MAX_NEAR_OFFERS_AMOUNT = 3;
+const MAX_IMAGES_AMOUNT = 6;
+
 type CardOfferProps = {
   cardOffer: OfferDetail[];
   reviews: Review[];
@@ -37,7 +40,7 @@ export default function CardOffer({cardOffer, reviews, offers}: CardOfferProps) 
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {images.slice(0, 6).map((image) => (
+              {images.slice(0, MAX_IMAGES_AMOUNT).map((image) => (
                 <div className="offer__image-wrapper" key={image}>
                   <img className="offer__image" src={image} alt="Photo studio"/>
                 </div>
@@ -124,7 +127,7 @@ export default function CardOffer({cardOffer, reviews, offers}: CardOfferProps) 
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {offers.slice(0, 3).map((offer) => (
+              {offers.slice(0, MAX_NEAR_OFFERS_AMOUNT).map((offer) => (
                 <Card offer={offer} key={offer.id} />
               ))}
             </div>

@@ -47,7 +47,7 @@ export default function Card({offer, onMouseOver}: CardProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.cardOffer}>{title}</Link>
+          <Link to={`${AppRoute.cardOffer}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{housing[type]}</p>
       </div>
