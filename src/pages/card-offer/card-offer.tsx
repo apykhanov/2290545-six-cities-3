@@ -28,7 +28,7 @@ export default function CardOffer({cardOffer, reviews}: CardOfferProps) {
     <div className="page">
       <header className="header">
         <div className="container">
-          <Header/>
+          <Header />
         </div>
       </header>
       <main className="page__main page__main--offer">
