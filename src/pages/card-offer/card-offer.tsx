@@ -124,7 +124,7 @@ export default function CardOffer({cardOffer, reviews, offers}: CardOfferProps) 
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {offers.map((offer) => (
+              {offers.slice(0, 3).map((offer) => (
                 <Card offer={offer} key={offer.id} />
               ))}
             </div>
