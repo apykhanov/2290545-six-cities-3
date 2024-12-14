@@ -38,7 +38,9 @@ export default function Main({offers}: MainProps) {
               <CardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} activeCard={activeCard} />
+              <section className="cities__map map">
+                <Map offers={offers} activeCard={activeCard}/>
+              </section>
             </div>
           </div>
         </div>
