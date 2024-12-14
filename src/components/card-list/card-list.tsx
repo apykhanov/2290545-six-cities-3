@@ -8,7 +8,7 @@ type CardListProps = {
 };
 
 export default function CardList({offers}: CardListProps) {
-  const [, setActiveCard] = useState('');
+  const [,setActiveCard] = useState('');
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (

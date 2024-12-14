@@ -8,16 +8,16 @@ export const offersMock: OfferPreview[] = [
     'price': 105,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/4.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 52.37454,
+        'longitude': 4.897976,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.868610000000004,
-      'longitude': 2.342499,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -31,16 +31,16 @@ export const offersMock: OfferPreview[] = [
     'price': 225,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/15.jpg',
     'city': {
-      'name': 'Brussels',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 50.846557,
-        'longitude': 4.351697,
+        'latitude': 52.37454,
+        'longitude': 4.897976,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 50.867557,
-      'longitude': 4.371696999999999,
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -62,8 +62,8 @@ export const offersMock: OfferPreview[] = [
       }
     },
     'location': {
-      'latitude': 52.37454,
-      'longitude': 4.881976,
+      'latitude': 52.397540000000006,
+      'longitude': 4.9099759999999995,
       'zoom': 16
     },
     'isFavorite': false,
@@ -77,16 +77,16 @@ export const offersMock: OfferPreview[] = [
     'price': 678,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/8.jpg',
     'city': {
-      'name': 'Dusseldorf',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 51.225402,
-        'longitude': 6.776314,
+        'latitude': 52.37454,
+        'longitude': 4.897976,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 51.228402,
-      'longitude': 6.784314,
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
       'zoom': 16
     },
     'isFavorite': false,

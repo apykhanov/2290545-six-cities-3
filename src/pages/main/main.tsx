@@ -1,9 +1,10 @@
 import Sort from '../../components/sort/sort.tsx';
 import CardList from '../../components/card-list/card-list.tsx';
-import CitiesMap from '../../components/cities-map/cities-map.tsx';
+import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
 import {OfferPreview} from '../../types/offer.ts';
+import {useState} from 'react';
 
 
 type MainProps = {
@@ -11,6 +12,7 @@ type MainProps = {
 }
 
 export default function Main({offers}: MainProps) {
+  const [activeCard, ] = useState(offers[0]);
 
   return (
     <div className="page page--gray page--main">
@@ -36,7 +38,7 @@ export default function Main({offers}: MainProps) {
               <CardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <CitiesMap/>
+              <Map offers={offers} activeCard={activeCard} />
             </div>
           </div>
         </div>
