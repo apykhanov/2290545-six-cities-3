@@ -12,7 +12,7 @@ type MainProps = {
 }
 
 export default function Main({offers}: MainProps) {
-  const [activeCard, ] = useState(offers[0]);
+  const [activeCard, setActiveCard ] = useState(offers[0]);
 
   return (
     <div className="page page--gray page--main">
@@ -35,7 +35,7 @@ export default function Main({offers}: MainProps) {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sort/>
-              <CardList offers={offers}/>
+              <CardList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

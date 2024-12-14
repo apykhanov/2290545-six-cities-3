@@ -51,5 +51,17 @@ export default function Map({ offers, activeCard}: MapProps) {
     }
   }, [map, offers, activeCard]);
 
-  return <div style={{ height: '100%' }} ref={mapRef}></div>;
+  return (
+    <section
+      style={{
+        height: '100%',
+        minHeight: '500px',
+        width: '100%',
+        maxWidth: '1144px',
+        margin: '0 auto',
+      }}
+      ref={mapRef}
+    >
+    </section>
+  );
 }
