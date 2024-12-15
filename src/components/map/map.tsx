@@ -2,6 +2,7 @@ import {useRef, useEffect } from 'react';
 import leaflet, {layerGroup, Marker} from 'leaflet';
 import useMap from '../hook/use-map.tsx';
 import {OfferPreview} from '../../types/offer.ts';
+import 'leaflet/dist/leaflet.css';
 
 const URL_MARKER_DEFAULT = 'img/pin.svg';
 const URL_MARKER_CURRENT = 'img/pin-active.svg';

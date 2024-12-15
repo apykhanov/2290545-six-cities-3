@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import {useEffect, useState, useRef, MutableRefObject} from 'react';
 import leaflet, {Map} from 'leaflet';
 import {City} from '../../types/offer.ts';
 
@@ -8,7 +8,7 @@ const MAP_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 export default function useMap(
-  mapRef: React.MutableRefObject<HTMLElement | null>,
+  mapRef: MutableRefObject<HTMLElement | null>,
   city: City,
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
