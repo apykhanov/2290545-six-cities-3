@@ -1,9 +1,10 @@
 import Sort from '../../components/sort/sort.tsx';
 import CardList from '../../components/card-list/card-list.tsx';
-import CitiesMap from '../../components/cities-map/cities-map.tsx';
+import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
 import {OfferPreview} from '../../types/offer.ts';
+import {useState} from 'react';
 
 
 type MainProps = {
@@ -11,6 +12,7 @@ type MainProps = {
 }
 
 export default function Main({offers}: MainProps) {
+  const [activeCard, setActiveCard ] = useState(offers[0]);
 
   return (
     <div className="page page--gray page--main">
@@ -33,10 +35,12 @@ export default function Main({offers}: MainProps) {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sort/>
-              <CardList offers={offers}/>
+              <CardList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
-              <CitiesMap/>
+              <section className="cities__map map">
+                <Map offers={offers} activeCard={activeCard}/>
+              </section>
             </div>
           </div>
         </div>

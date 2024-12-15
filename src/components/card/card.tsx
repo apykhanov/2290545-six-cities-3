@@ -2,22 +2,26 @@ import {Link} from 'react-router-dom';
 import {AppRoute, housing} from '../../const.ts';
 import {OfferPreview} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
-import {MouseEvent} from 'react';
 
 
 type CardProps = {
   offer: OfferPreview;
-  onMouseOver?: (evt: MouseEvent) => void;
+  setCurrentCard: (offer: OfferPreview) => void;
 };
 
-export default function Card({offer, onMouseOver}: CardProps) {
+export default function Card({offer, setCurrentCard}: CardProps) {
   const {previewImage, title, type, rating, price, id} = offer;
+
+  const handleCardOver = () => {
+    setCurrentCard(offer);
+  };
+
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper" onMouseOver={onMouseOver}>
+      <div className="cities__image-wrapper place-card__image-wrapper" onMouseOver={handleCardOver}>
         <Link to={`${AppRoute.cardOffer}/${id}`}>
           <img className="place-card__image"
             src={previewImage}

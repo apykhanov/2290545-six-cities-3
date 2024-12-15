@@ -1,18 +1,18 @@
 import Card from '../card/card.tsx';
 import {OfferPreview} from '../../types/offer.ts';
-import {useState} from 'react';
 
 
 type CardListProps = {
   offers: OfferPreview[];
+  setActiveCard: (offer: OfferPreview) => void;
 };
 
-export default function CardList({offers}: CardListProps) {
-  const [, setActiveCard] = useState('');
+export default function CardList({offers, setActiveCard}: CardListProps) {
+
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <Card key={offer.id} offer={offer} onMouseOver={() => setActiveCard(offer.id)}/>
+        <Card key={offer.id} offer={offer} setCurrentCard={setActiveCard} />
       ))}
     </div>
   );
