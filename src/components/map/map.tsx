@@ -10,6 +10,7 @@ const URL_MARKER_CURRENT = 'img/pin-active.svg';
 type MapProps = {
   activeCard: OfferPreview;
   offers: OfferPreview[];
+  isNearby?: boolean;
 };
 
 const defaultCustomIcon = leaflet.icon({
@@ -24,7 +25,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [13, 39]
 });
 
-export default function Map({ offers, activeCard}: MapProps) {
+export default function Map({ offers, activeCard, isNearby}: MapProps) {
   const mapRef = useRef(null);
   const {city} = activeCard;
   const map: leaflet.Map | null = useMap(mapRef, city);
@@ -45,12 +46,19 @@ export default function Map({ offers, activeCard}: MapProps) {
           .addTo(markerLayer);
       });
 
+      if (isNearby) {
+        const marker = new Marker({
+          lat: activeCard.location.latitude,
+          lng: activeCard.location.longitude,
+        });
+        marker.setIcon(currentCustomIcon).addTo(markerLayer);
+      }
 
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeCard]);
+  }, [map, offers, activeCard, isNearby]);
 
   return (
     <section
