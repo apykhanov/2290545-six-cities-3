@@ -14,15 +14,15 @@ const MAX_NEAR_OFFERS_AMOUNT = 3;
 const MAX_IMAGES_AMOUNT = 6;
 
 type CardOfferProps = {
-  cardOffer: OfferDetail[];
+  cardOffers: OfferDetail[];
   reviews: Review[];
   offers: OfferPreview[];
 }
 
-export default function CardOffer({cardOffer, reviews, offers}: CardOfferProps) {
+export default function CardOffer({cardOffers, reviews, offers}: CardOfferProps) {
 
   const {id} = useParams();
-  const currentOffer = cardOffer.find((item) => item.id === id);
+  const currentOffer = cardOffers.find((item) => item.id === id);
   const [activeCard, setActiveCard] = useState<OfferPreview>(offers[0]);
 
   if (!currentOffer) {
