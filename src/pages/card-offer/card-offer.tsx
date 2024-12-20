@@ -129,7 +129,7 @@ export default function CardOffer({cardOffer, reviews, offers, activeCard}: Card
             </div>
           </div>
           <section className="offer__map map"/>
-          <Map offers={offers} activeCard={activeCard}/>
+          <Map offers={offers} activeCard={activeCard} isNearby={}/>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -138,7 +138,7 @@ export default function CardOffer({cardOffer, reviews, offers, activeCard}: Card
             </h2>
             <div className="near-places__list places__list">
               {offers.slice(0, MAX_NEAR_OFFERS_AMOUNT).map((offer) => (
-                <Card offer={offer} key={offer.id}/>
+                <Card offer={offer} key={offer.id} setCurrentCard={activeCard}/>
               ))}
             </div>
           </section>
