@@ -8,6 +8,7 @@ import {Review} from '../../types/review.ts';
 import {ReviewItem} from '../../components/review-item/review-item.tsx';
 import Card from '../../components/card/card.tsx';
 import Map from '../../components/map/map.tsx';
+import {useState} from 'react';
 
 const MAX_NEAR_OFFERS_AMOUNT = 3;
 const MAX_IMAGES_AMOUNT = 6;
@@ -16,13 +17,14 @@ type CardOfferProps = {
   cardOffer: OfferDetail[];
   reviews: Review[];
   offers: OfferPreview[];
-  activeCard: OfferPreview;
 }
 
-export default function CardOffer({cardOffer, reviews, offers, activeCard}: CardOfferProps) {
+export default function CardOffer({cardOffer, reviews, offers}: CardOfferProps) {
 
   const {id} = useParams();
   const currentOffer = cardOffer.find((item) => item.id === id);
+  const [activeCard, setActiveCard] = useState<OfferPreview>(offers[0]);
+
   if (!currentOffer) {
     return <Navigate to={AppRoute.NotFound} />;
   }
@@ -128,8 +130,9 @@ export default function CardOffer({cardOffer, reviews, offers, activeCard}: Card
               </section>
             </div>
           </div>
-          <section className="offer__map map"/>
-          <Map offers={offers} activeCard={activeCard} isNearby={}/>
+          <section className="offer__map map">
+            <Map offers={offers} activeCard={activeCard} isNearby/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -138,7 +141,7 @@ export default function CardOffer({cardOffer, reviews, offers, activeCard}: Card
             </h2>
             <div className="near-places__list places__list">
               {offers.slice(0, MAX_NEAR_OFFERS_AMOUNT).map((offer) => (
-                <Card offer={offer} key={offer.id} setCurrentCard={activeCard}/>
+                <Card offer={offer} key={offer.id} setCurrentCard={(newActiveCard) => setActiveCard(newActiveCard)} />
               ))}
             </div>
           </section>
