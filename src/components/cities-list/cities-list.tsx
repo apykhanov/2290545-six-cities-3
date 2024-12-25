@@ -1,13 +1,14 @@
-import {useAppSelector} from '../hook/useAppSelector.ts';
 import {useAppDispatch} from '../hook/useAppDispatch.ts';
 import {setCity} from '../../store/action.ts';
-import {AppRoute, Cities} from '../../const.ts';
+import {Cities} from '../../const.ts';
 import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 
+type CitiesListProps = {
+  currentCity: string;
+}
 
-export default function CitiesList() {
-  const currentCity = useAppSelector((state) => state.city);
+export default function CitiesList({currentCity}: CitiesListProps) {
   const dispatch = useAppDispatch();
   const handleCityChange = (city: string) => {
     dispatch(setCity(city));
@@ -24,7 +25,7 @@ export default function CitiesList() {
             className={classNames('locations__item-link', 'tabs__item', {
               'tabs__item--active': currentCity === city,
             })}
-            to={AppRoute.Root}
+            to="#"
           >
             <span>{city}</span>
           </Link>
