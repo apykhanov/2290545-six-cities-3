@@ -23,6 +23,17 @@ export const housing: Record<string, string> = {
   hotel: 'Hotel'
 };
 
+export const Cities = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
+export const DEFAULT_CITY = 'Paris';
+
 export const MAX_STARS_RATING = 20;
 
 export const MAX_COMMENTS_LENGTH = 140;

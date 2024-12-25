@@ -1,36 +1,37 @@
+import {useAppSelector} from '../hook/useAppSelector.ts';
+import {useAppDispatch} from '../hook/useAppDispatch.ts';
+import {setCity} from '../../store/action.ts';
+import {AppRoute, Cities} from '../../const.ts';
+import {Link} from 'react-router-dom';
+import classNames from 'classnames';
+
+
 export default function CitiesList() {
+  const currentCity = useAppSelector((state) => state.city);
+  const dispatch = useAppDispatch();
+  const handleCityChange = (city: string) => {
+    dispatch(setCity(city));
+  };
   return (
     <ul className="locations__list tabs__list">
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Paris</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Cologne</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Brussels</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item tabs__item--active">
-          <span>Amsterdam</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Hamburg</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Dusseldorf</span>
-        </a>
-      </li>
+      {Cities.map((city) => (
+        <li
+          key={city}
+          className="locations__item"
+          onClick={() => handleCityChange(city)}
+        >
+          <Link
+            className={classNames('locations__item-link', 'tabs__item', {
+              'tabs__item--active': currentCity === city,
+            })}
+            to={AppRoute.Root}
+          >
+            <span>{city}</span>
+          </Link>
+
+        </li>
+      ))}
+
     </ul>
   );
 }
