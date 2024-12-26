@@ -1,4 +1,4 @@
-import {useAppDispatch} from '../hook/useAppDispatch.ts';
+import {useAppDispatch} from '../hook/use-app-dispatch.tsx';
 import {setCity} from '../../store/action.ts';
 import {Cities} from '../../const.ts';
 import {Link} from 'react-router-dom';

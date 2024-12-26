@@ -5,8 +5,8 @@ import {getOffers, setCity} from './action.ts';
 import {offersMock} from '../mock/offers.ts';
 
 type InitialState = {
-  city: string | undefined;
-  offers: OfferPreview[] | undefined;
+  city: string;
+  offers: OfferPreview[];
 }
 
 const initialState: InitialState = {

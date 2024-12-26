@@ -23,7 +23,7 @@ export default function App({offers, reviews, cardOffers}: AppProps) {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<Main offers={offers} />}
+          element={<Main />}
         />
         <Route
           path={`${AppRoute.cardOffer}/:id`}

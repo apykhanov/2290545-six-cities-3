@@ -3,13 +3,15 @@ import CardList from '../../components/card-list/card-list.tsx';
 import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
-import {useAppSelector} from '../../components/hook/useAppSelector.ts';
+import {useAppSelector} from '../../components/hook/use-app-selector.tsx';
+import {useActiveCard} from '../../components/hook/use-active-card.tsx';
 
 
 export default function Main() {
   const currentCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
   const filteredOffers = offers.filter((offer) => offer.city.name === currentCity);
+  const {activeCard, setActiveCard} = useActiveCard();
 
 
   return (
@@ -33,11 +35,11 @@ export default function Main() {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredOffers.length} places to stay in {currentCity}</b>
               <Sort/>
-              <CardList offers={filteredOffers}/>
+              <CardList offers={filteredOffers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={filteredOffers}/>
+                <Map offers={filteredOffers} activeCard={activeCard}/>
               </section>
             </div>
           </div>
