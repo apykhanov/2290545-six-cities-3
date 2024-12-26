@@ -4,14 +4,9 @@ import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
 import {useAppSelector} from '../../components/hook/useAppSelector.ts';
-import {OfferPreview} from '../../types/offer.ts';
 
-type MainProps = {
-  currentCity: string;
-  offers: OfferPreview[];
-}
 
-export default function Main({currentCity, offers}: MainProps) {
+export default function Main() {
   const currentCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
   const filteredOffers = offers.filter((offer) => offer.city.name === currentCity);
