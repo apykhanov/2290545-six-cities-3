@@ -3,16 +3,16 @@ import CardList from '../../components/card-list/card-list.tsx';
 import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
-import {OfferPreview} from '../../types/offer.ts';
-import {useState} from 'react';
+import {useAppSelector} from '../../components/hook/use-app-selector.tsx';
+import {useActiveCard} from '../../components/hook/use-active-card.tsx';
 
 
-type MainProps = {
-  offers: OfferPreview[];
-}
+export default function Main() {
+  const currentCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers);
+  const filteredOffers = offers.filter((offer) => offer.city.name === currentCity);
+  const {activeCard, setActiveCard} = useActiveCard();
 
-export default function Main({offers}: MainProps) {
-  const [activeCard, setActiveCard ] = useState(offers[0]);
 
   return (
     <div className="page page--gray page--main">
@@ -26,20 +26,20 @@ export default function Main({offers}: MainProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList/>
+            <CitiesList currentCity={currentCity}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{filteredOffers.length} places to stay in {currentCity}</b>
               <Sort/>
-              <CardList offers={offers} setActiveCard={setActiveCard} />
+              <CardList offers={filteredOffers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers} activeCard={activeCard}/>
+                <Map offers={filteredOffers} activeCard={activeCard}/>
               </section>
             </div>
           </div>

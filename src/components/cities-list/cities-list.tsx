@@ -1,36 +1,38 @@
-export default function CitiesList() {
+import {useAppDispatch} from '../hook/use-app-dispatch.tsx';
+import {setCity} from '../../store/action.ts';
+import {Cities} from '../../const.ts';
+import {Link} from 'react-router-dom';
+import classNames from 'classnames';
+
+type CitiesListProps = {
+  currentCity: string;
+}
+
+export default function CitiesList({currentCity}: CitiesListProps) {
+  const dispatch = useAppDispatch();
+  const handleCityChange = (city: string) => {
+    dispatch(setCity(city));
+  };
   return (
     <ul className="locations__list tabs__list">
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Paris</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Cologne</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Brussels</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item tabs__item--active">
-          <span>Amsterdam</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Hamburg</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Dusseldorf</span>
-        </a>
-      </li>
+      {Cities.map((city) => (
+        <li
+          key={city}
+          className="locations__item"
+          onClick={() => handleCityChange(city)}
+        >
+          <Link
+            className={classNames('locations__item-link', 'tabs__item', {
+              'tabs__item--active': currentCity === city,
+            })}
+            to="#"
+          >
+            <span>{city}</span>
+          </Link>
+
+        </li>
+      ))}
+
     </ul>
   );
 }
