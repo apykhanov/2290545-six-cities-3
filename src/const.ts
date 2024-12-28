@@ -23,6 +23,13 @@ export const housing: Record<string, string> = {
   hotel: 'Hotel'
 };
 
+export const SortingMap = {
+  Popular: 'Popular',
+  LowToHigh: 'Price: Low To High',
+  HighToLow: 'Price: High To Low',
+  TopRated: 'Top rated first',
+} as const;
+
 export const Cities = [
   'Paris',
   'Cologne',
@@ -33,6 +40,7 @@ export const Cities = [
 ];
 
 export const DEFAULT_CITY = 'Paris';
+export const DEFAULT_SORTING = 'Popular';
 
 export const MAX_STARS_RATING = 20;
 
