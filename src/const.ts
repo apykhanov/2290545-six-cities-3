@@ -39,6 +39,11 @@ export const Cities = [
   'Dusseldorf',
 ];
 
+export const DateFormat = {
+  AttributeFormat: 'YYYY-MM-DD',
+  ReviewDateFormat: 'MMMM YYYY'
+};
+
 export const DEFAULT_CITY = 'Paris';
 export const DEFAULT_SORTING = 'Popular';
 

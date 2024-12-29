@@ -4,7 +4,7 @@ import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
 import {useAppSelector} from '../../components/hook/use-app-selector.tsx';
 import {useActiveCard} from '../../components/hook/use-active-card.tsx';
-import PlaceSorting from '../../components/placeSorting/PlaceSorting.tsx';
+import PlaceSorting from '../../components/place-sorting/place-sorting.tsx';
 import {sorting} from '../../utils/utils.ts';
 
 
