@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <App offers={offersMock} reviews={reviewMock} cardOffers={cardOffersMock} />
+      <App reviews={reviewMock} cardOffers={cardOffersMock} />
     </Provider>
   </React.StrictMode>
 );

@@ -2,8 +2,8 @@ import CardList from '../../components/card-list/card-list.tsx';
 import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
-import {useAppSelector} from '../../components/hook/use-app-selector.tsx';
-import {useActiveCard} from '../../components/hook/use-active-card.tsx';
+import {useAppSelector} from '../../hook/use-app-selector.tsx';
+import {useActiveCard} from '../../hook/use-active-card.tsx';
 import PlaceSorting from '../../components/place-sorting/place-sorting.tsx';
 import {sorting} from '../../utils/utils.ts';
 

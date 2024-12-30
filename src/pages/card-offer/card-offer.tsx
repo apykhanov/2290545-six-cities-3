@@ -8,7 +8,7 @@ import {Review} from '../../types/review.ts';
 import {ReviewItem} from '../../components/review-item/review-item.tsx';
 import Card from '../../components/card/card.tsx';
 import Map from '../../components/map/map.tsx';
-import {useActiveCard} from '../../components/hook/use-active-card.tsx';
+import {useActiveCard} from '../../hook/use-active-card.tsx';
 
 const MAX_NEAR_OFFERS_AMOUNT = 3;
 const MAX_IMAGES_AMOUNT = 6;

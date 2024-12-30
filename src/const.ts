@@ -49,5 +49,5 @@ export const DEFAULT_SORTING = 'Popular';
 
 export const MAX_STARS_RATING = 20;
 
-export const MAX_COMMENTS_LENGTH = 140;
+export const MAX_COMMENTS_LENGTH = 300;
 export const MIN_COMMENTS_LENGTH = 50;
