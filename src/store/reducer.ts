@@ -1,7 +1,7 @@
 import {DEFAULT_CITY, DEFAULT_SORTING} from '../const.ts';
 import {OfferPreview} from '../types/offer.ts';
 import {createReducer} from '@reduxjs/toolkit';
-import {changeSortingTypes, fillOffers, loadOffers, setCity} from './action.ts';
+import {changeSortingTypes, fillOffers, loadOffers, setCity, setOfferDataLoadingStatus} from './action.ts';
 import {Sorting} from '../types/sort.ts';
 
 
@@ -11,7 +11,6 @@ type InitialState = {
   sortTypes: Sorting;
   isOffersLoaded: boolean;
   sortedOffers: OfferPreview[];
-
 }
 
 const initialState: InitialState = {
@@ -34,6 +33,9 @@ export const reducer = createReducer(initialState, (builder) => {
       state.sortTypes = action.payload;
     })
     .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+    })
+    .addCase(setOfferDataLoadingStatus, (state, action) => {
       state.isOffersLoaded = action.payload;
     });
 });

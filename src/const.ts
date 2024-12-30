@@ -39,6 +39,10 @@ export const Cities = [
   'Dusseldorf',
 ];
 
+export enum APIRoute {
+  cardOffer = '/card-offer',
+}
+
 export const DateFormat = {
   AttributeFormat: 'YYYY-MM-DD',
   ReviewDateFormat: 'MMMM YYYY'

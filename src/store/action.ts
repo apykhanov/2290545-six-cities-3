@@ -5,4 +5,5 @@ import {Sorting} from '../types/sort.ts';
 export const setCity = createAction<string>('city/setCity');
 export const fillOffers = createAction<OfferPreview[]>('offers/fillOffers');
 export const changeSortingTypes = createAction<Sorting>('offers/changeSortingTypes');
-export const loadOffers = createAction<boolean>('data/loadOffers');
+export const loadOffers = createAction<OfferPreview[]>('data/loadOffers');
+export const setOfferDataLoadingStatus = createAction<boolean>('offers/setOfferDataLoadingStatus');
