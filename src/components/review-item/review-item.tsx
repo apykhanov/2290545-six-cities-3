@@ -1,5 +1,7 @@
 import {getRatingStarsStyle} from '../../utils/utils.ts';
 import {Review} from '../../types/review.ts';
+import dayjs from 'dayjs';
+import {DateFormat} from '../../const.ts';
 
 type ReviewItemProps = {
   review: Review;
@@ -31,8 +33,11 @@ export function ReviewItem({review}: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={review.date}>
-          {review.date}
+        <time
+          className="reviews__time"
+          dateTime={dayjs().format(DateFormat.AttributeFormat)}
+        >
+          {dayjs().format(DateFormat.ReviewDateFormat)}
         </time>
       </div>
     </li>

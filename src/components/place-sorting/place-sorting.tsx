@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import {useState} from 'react';
-import {useAppDispatch} from '../hook/use-app-dispatch.tsx';
+import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 import {SortingMap} from '../../const.ts';
 import {Sorting} from '../../types/sort.ts';
 import {changeSortingTypes} from '../../store/action.ts';

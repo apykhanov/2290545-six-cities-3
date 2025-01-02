@@ -6,7 +6,9 @@ import {reviewMock} from './mock/reviews.ts';
 import {cardOffersMock} from './mock/card-offers.ts';
 import {Provider} from 'react-redux';
 import {store} from './store';
+import {fetchOffersAction} from './store/api-actions.ts';
 
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
