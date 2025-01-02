@@ -40,7 +40,7 @@ export const Cities = [
 ];
 
 export enum APIRoute {
-  cardOffer = '/card-offer',
+  cardOffer = 'offers',
 }
 
 export const DateFormat = {
