@@ -6,6 +6,7 @@ import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {useActiveCard} from '../../hook/use-active-card.tsx';
 import PlaceSorting from '../../components/place-sorting/place-sorting.tsx';
 import {sorting} from '../../utils/utils.ts';
+// import Spinner from '../../components/spinner/spinner.tsx';
 
 
 export default function Main() {
@@ -14,6 +15,7 @@ export default function Main() {
   const filteredOffers = offers.filter((offer) => offer.city.name === currentCity);
   const currentSortType = useAppSelector((state)=> state.sortTypes);
   const sortedOffers = sorting[currentSortType](filteredOffers);
+  // const isOffersLoaded = useAppSelector((state) => state.isOffersLoaded);
 
   const {activeCard, setActiveCard} = useActiveCard();
 
