@@ -1,7 +1,7 @@
-import {DEFAULT_CITY, DEFAULT_SORTING} from '../const.ts';
+import {DEFAULT_CITY, DEFAULT_SORTING, AuthorizationStatus} from '../const.ts';
 import {OfferPreview} from '../types/offer.ts';
 import {createReducer} from '@reduxjs/toolkit';
-import {changeSortingTypes, fillOffers, loadOffers, setCity, setOfferDataLoadingStatus} from './action.ts';
+import {changeSortingTypes, fillOffers, loadOffers, setCity, setOfferDataLoadingStatus, requireAuthorization} from './action.ts';
 import {Sorting} from '../types/sort.ts';
 
 
@@ -11,6 +11,7 @@ type InitialState = {
   sortTypes: Sorting;
   isOffersLoaded: boolean;
   sortedOffers: OfferPreview[];
+  authorizationStatus: AuthorizationStatus;
 }
 
 const initialState: InitialState = {
@@ -19,6 +20,7 @@ const initialState: InitialState = {
   sortTypes: DEFAULT_SORTING,
   isOffersLoaded: false,
   sortedOffers: [],
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -37,5 +39,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOfferDataLoadingStatus, (state, action) => {
       state.isOffersLoaded = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });

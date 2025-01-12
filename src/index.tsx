@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app.tsx';
+import App from './app.tsx';
 import {offersMock} from './mock/offers.ts';
 import {reviewMock} from './mock/reviews.ts';
 import {cardOffersMock} from './mock/card-offers.ts';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import {fetchOffersAction} from './store/api-actions.ts';
+import {checkAuthAction, fetchOffersAction} from './store/api-actions.ts';
 
 store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

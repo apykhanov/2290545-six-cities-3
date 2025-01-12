@@ -41,6 +41,8 @@ export const Cities = [
 
 export enum APIRoute {
   cardOffer = 'offers',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const DateFormat = {
