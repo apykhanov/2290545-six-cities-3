@@ -1,11 +1,12 @@
 import {useRef, useEffect } from 'react';
 import leaflet, {layerGroup, Marker} from 'leaflet';
-import useMap from '../hook/use-map.tsx';
+import useMap from '../../hook/use-map.tsx';
 import {OfferPreview} from '../../types/offer.ts';
 import 'leaflet/dist/leaflet.css';
 
 const URL_MARKER_DEFAULT = 'img/pin.svg';
 const URL_MARKER_CURRENT = 'img/pin-active.svg';
+
 
 type MapProps = {
   activeCard: OfferPreview;
@@ -27,14 +28,13 @@ const currentCustomIcon = leaflet.icon({
 
 export default function Map({ offers, activeCard, isNearby}: MapProps) {
   const mapRef = useRef(null);
-  const {city} = activeCard;
-  const map: leaflet.Map | null = useMap(mapRef, city);
+  const map = useMap(mapRef, offers[0].city);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
 
-      offers.map(({ location, id }) => {
+      offers.map(({location, id}) => {
         const marker = new Marker({
           lat: location.latitude,
           lng: location.longitude,
@@ -60,6 +60,7 @@ export default function Map({ offers, activeCard, isNearby}: MapProps) {
     }
   }, [map, offers, activeCard, isNearby]);
 
+
   return (
     <section
       style={{
@@ -74,3 +75,5 @@ export default function Map({ offers, activeCard, isNearby}: MapProps) {
     </section>
   );
 }
+
+
