@@ -1,7 +1,7 @@
 import Header from '../../components/header/header.tsx';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import {AppRoute, housing} from '../../const.ts';
-import {OfferDetail, OfferPreview} from '../../types/offer.ts';
+import {OfferPreview} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
 import {Navigate, useParams} from 'react-router-dom';
 import {Review} from '../../types/review.ts';
@@ -14,12 +14,11 @@ const MAX_NEAR_OFFERS_AMOUNT = 3;
 const MAX_IMAGES_AMOUNT = 6;
 
 type CardOfferProps = {
-  cardOffers: OfferDetail[];
   reviews: Review[];
   offers: OfferPreview[];
 }
 
-export default function CardOffer({cardOffers, reviews, offers}: CardOfferProps) {
+export default function CardOffer({reviews, offers}: CardOfferProps) {
 
   const {id} = useParams();
   const currentOffer = cardOffers.find((item) => item.id === id);

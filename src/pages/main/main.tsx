@@ -17,7 +17,7 @@ export default function Main() {
 
   const {activeCard, setActiveCard} = useActiveCard();
 
-
+  console.log(filteredOffers);
   return (
     <div className="page page--gray page--main">
       <header className="header">

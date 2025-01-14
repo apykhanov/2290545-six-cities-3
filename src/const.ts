@@ -40,7 +40,7 @@ export const Cities = [
 ];
 
 export enum APIRoute {
-  cardOffer = 'offers',
+  Offers = 'offers',
   Login = '/login',
   Logout = '/logout',
 }

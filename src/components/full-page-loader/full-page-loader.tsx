@@ -1,7 +1,10 @@
 import Spinner from '../spinner/spinner.tsx';
-import Styles from './full-page-loader.module.css';
+import styles from './full-page-loader.module.css';
 
 export default function FullPageLoader() {
-  return <div className={Styles.flex}><Spinner/></div> ;
+  return (
+    <div className={styles.flex}>
+      <Spinner/>
+    </div>);
 }
 

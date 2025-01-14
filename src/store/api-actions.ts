@@ -10,7 +10,7 @@ import {UserData} from '../types/userData.ts';
 export const fetchOffersAction = createAsyncThunk<void, undefined, ThunkOptions>(
   'data/loadOffers',
   async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<OfferPreview[]>(APIRoute.cardOffer);
+    const {data} = await api.get<OfferPreview[]>(APIRoute.Offers);
     dispatch(setOfferDataLoadingStatus(true));
     dispatch(loadOffers(data));
   },
