@@ -1,22 +1,28 @@
 import Main from './pages/main/main.tsx';
 import Login from './pages/login/login.tsx';
 import NotFound from './pages/notfound/notFound.tsx';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from './const.ts';
 import {useAppSelector} from './hook/use-app-selector.tsx';
 import FullPageLoader from './components/full-page-loader/full-page-loader.tsx';
+import browserHistory from './browserHistory/browserHistory.ts';
+import HistoryRouter from './components/HistoryRouter/HistoryRouter.tsx';
+import {getAuthCheckedStatus, getAuthorizationStatus} from './store/user-process/selector.ts';
+import {getOfferDataLoadingStatus} from './store/data-offer/selector.ts';
 
 
 export default function App() {
-  const isOffersLoaded = useAppSelector((state) => state.isOffersLoaded);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isOffersDataLoading = useAppSelector(getOfferDataLoadingStatus);
 
-  if (!isOffersLoaded || authorizationStatus === AuthorizationStatus.Unknown) {
+
+  if (!isOffersDataLoading || authorizationStatus === AuthorizationStatus.Unknown) {
     return <FullPageLoader />;
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -45,7 +51,7 @@ export default function App() {
           element={<NotFound />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

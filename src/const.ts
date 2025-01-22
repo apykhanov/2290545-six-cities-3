@@ -43,6 +43,7 @@ export enum APIRoute {
   Offers = 'offers',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
 }
 
 export const DateFormat = {
@@ -50,6 +51,11 @@ export const DateFormat = {
   ReviewDateFormat: 'MMMM YYYY'
 };
 
+export enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFER',
+  Comments = 'COMMENTS',
+}
 export const DEFAULT_CITY = 'Paris';
 export const DEFAULT_SORTING = 'Popular';
 

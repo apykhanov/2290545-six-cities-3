@@ -6,11 +6,12 @@ import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {useActiveCard} from '../../hook/use-active-card.tsx';
 import PlaceSorting from '../../components/place-sorting/place-sorting.tsx';
 import {sorting} from '../../utils/utils.ts';
+import {getOffers} from '../../store/data-offer/selector.ts';
 
 
 export default function Main() {
   const currentCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
   const filteredOffers = offers.filter((offer) => offer.city.name === currentCity);
   const currentSortType = useAppSelector((state)=> state.sortTypes);
   const sortedOffers = sorting[currentSortType](filteredOffers);
