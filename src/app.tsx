@@ -8,17 +8,24 @@ import FullPageLoader from './components/full-page-loader/full-page-loader.tsx';
 import browserHistory from './browserHistory/browserHistory.ts';
 import HistoryRouter from './components/HistoryRouter/HistoryRouter.tsx';
 import {getAuthCheckedStatus, getAuthorizationStatus} from './store/user-process/selector.ts';
-import {getOfferDataLoadingStatus} from './store/data-offer/selector.ts';
+import {getErrorStatus, getOfferDataLoadingStatus} from './store/data-offer/selector.ts';
+import ErrorScreen from './components/error-screen/error-screen.tsx';
 
 
 export default function App() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isOffersDataLoading = useAppSelector(getOfferDataLoadingStatus);
+  const hasError = useAppSelector(getErrorStatus);
 
 
   if (!isOffersDataLoading || authorizationStatus === AuthorizationStatus.Unknown) {
     return <FullPageLoader />;
+  }
+
+  if (hasError) {
+    return (
+      <ErrorScreen />);
   }
 
   return (
