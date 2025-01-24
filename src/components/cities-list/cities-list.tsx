@@ -1,8 +1,8 @@
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
-import {setCity} from '../../store/action.ts';
 import {Cities} from '../../const.ts';
 import {Link} from 'react-router-dom';
 import classNames from 'classnames';
+import {changeCity} from '../../store/app/app-slice.ts';
 
 type CitiesListProps = {
   currentCity: string;
@@ -11,7 +11,7 @@ type CitiesListProps = {
 export default function CitiesList({currentCity}: CitiesListProps) {
   const dispatch = useAppDispatch();
   const handleCityChange = (city: string) => {
-    dispatch(setCity(city));
+    dispatch(changeCity(city));
   };
   return (
     <ul className="locations__list tabs__list">
