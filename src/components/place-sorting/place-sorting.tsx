@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 import {SortingMap} from '../../const.ts';
 import {Sorting} from '../../types/sort.ts';
-import {changeSortingTypes} from '../../store/action.ts';
+import {changeSortingType} from '../../store/app/app-slice.ts';
 
 type SortEntries = [Sorting, (typeof SortingMap)[Sorting]][];
 
@@ -25,7 +25,7 @@ export default function PlaceSorting({activeSorting}: SortingProps) {
   }
 
   function handleSortingItemClick(type: Sorting) {
-    dispatch(changeSortingTypes(type));
+    dispatch(changeSortingType(type));
     setIsOpened(false);
 
   }

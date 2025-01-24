@@ -55,6 +55,7 @@ export enum NameSpace {
   User = 'USER',
   Offers = 'OFFER',
   Comments = 'COMMENTS',
+  App = 'APP',
 }
 export const DEFAULT_CITY = 'Paris';
 export const DEFAULT_SORTING = 'Popular';

@@ -5,15 +5,16 @@ import Header from '../../components/header/header.tsx';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {useActiveCard} from '../../hook/use-active-card.tsx';
 import PlaceSorting from '../../components/place-sorting/place-sorting.tsx';
+import {getOffers} from '../../store/offers/selector.ts';
 import {sorting} from '../../utils/utils.ts';
-import {getOffers} from '../../store/data-offer/selector.ts';
+import {getCurrentCity, getCurrentSort} from '../../store/app/selector.ts';
 
 
 export default function Main() {
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector(getCurrentCity);
   const offers = useAppSelector(getOffers);
   const filteredOffers = offers.filter((offer) => offer.city.name === currentCity);
-  const currentSortType = useAppSelector((state)=> state.sortTypes);
+  const currentSortType = useAppSelector(getCurrentSort);
   const sortedOffers = sorting[currentSortType](filteredOffers);
 
   const {activeCard, setActiveCard} = useActiveCard();

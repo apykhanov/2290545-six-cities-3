@@ -1,7 +1,5 @@
 import {store} from '../store';
 import {AxiosInstance} from 'axios';
-import {AuthorizationStatus} from '../const.ts';
-import {OfferPreview} from './offer.ts';
 
 
 export type State = ReturnType<typeof store.getState>;
@@ -14,12 +12,9 @@ export type ThunkOptions = {
   extra: AxiosInstance;
 }
 
-export type UserProcess = {
-  authorizationStatus: AuthorizationStatus;
-};
-
-export type OfferData = {
-  offers: OfferPreview[];
-  isOffersDataLoading: boolean;
-  hasError: boolean;
-};
+export enum RequestStatus {
+  Idle = 'IDLE',
+  Loading = 'LOADING',
+  Error = 'ERROR',
+  Success = 'SUCCESS',
+}

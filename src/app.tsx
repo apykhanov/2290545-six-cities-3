@@ -8,7 +8,7 @@ import FullPageLoader from './components/full-page-loader/full-page-loader.tsx';
 import browserHistory from './browserHistory/browserHistory.ts';
 import HistoryRouter from './components/HistoryRouter/HistoryRouter.tsx';
 import {getAuthCheckedStatus, getAuthorizationStatus} from './store/user-process/selector.ts';
-import {getErrorStatus, getOfferDataLoadingStatus} from './store/data-offer/selector.ts';
+import {getErrorStatus, getOfferDataLoadingStatus} from './store/offers/selector.ts';
 import ErrorScreen from './components/error-screen/error-screen.tsx';
 
 
@@ -19,7 +19,7 @@ export default function App() {
   const hasError = useAppSelector(getErrorStatus);
 
 
-  if (!isOffersDataLoading || authorizationStatus === AuthorizationStatus.Unknown) {
+  if (isOffersDataLoading || authorizationStatus === AuthorizationStatus.Unknown) {
     return <FullPageLoader />;
   }
 

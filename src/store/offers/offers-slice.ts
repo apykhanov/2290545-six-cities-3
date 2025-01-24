@@ -1,7 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {OfferData} from '../../types/state.ts';
-import {NameSpace} from '../../const.ts';
 import {loadOffers} from '../api-actions.ts';
+import {OfferPreview} from '../../types/offer.ts';
+import {NameSpace} from '../../const.ts';
+
+type OfferData = {
+  offers: OfferPreview[];
+  isOffersDataLoading: boolean;
+  hasError: boolean;
+};
 
 const initialState: OfferData = {
   offers: [],
@@ -9,7 +15,7 @@ const initialState: OfferData = {
   hasError: false,
 };
 
-export const dataOffersSlice = createSlice({
+export const offersSlice = createSlice({
   name: NameSpace.Offers,
   initialState,
   reducers: {},

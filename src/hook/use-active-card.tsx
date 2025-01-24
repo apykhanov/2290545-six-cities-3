@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {OfferPreview} from '../types/offer.ts';
 import {useAppSelector} from './use-app-selector.tsx';
-import {getOffers} from '../store/data-offer/selector.ts';
+import {getOffers} from '../store/offers/selector.ts';
 
 export const useActiveCard = () => {
   const offers = useAppSelector(getOffers);

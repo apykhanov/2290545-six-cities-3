@@ -1,10 +1,16 @@
-import {UserProcess} from '../../types/state.ts';
 import {AuthorizationStatus, NameSpace} from '../../const.ts';
 import {createSlice} from '@reduxjs/toolkit';
 import {checkAuthAction, loginAction} from '../api-actions.ts';
+import {RequestStatus} from '../../types/state.ts';
+
+type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+  loginStatus: RequestStatus;
+};
 
 const initialState: UserProcess = {
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  loginStatus: RequestStatus.Idle
 };
 
 export const userProcessSlice = createSlice({
@@ -19,14 +25,14 @@ export const userProcessSlice = createSlice({
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
+      .addCase(loginAction.pending, (state) => {
+        state.loginStatus = RequestStatus.Loading;
+      })
       .addCase(loginAction.fulfilled, (state) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
+        state.loginStatus = RequestStatus.Success;
       })
       .addCase(loginAction.rejected, (state) => {
-        state.authorizationStatus = AuthorizationStatus.NoAuth;
-      })
-      .addCase(loginAction.fulfilled, (state) => {
-        state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.loginStatus = RequestStatus.Error;
       });
   }
 });
