@@ -10,3 +10,9 @@ export const getOfferDataLoadingStatus = (state: State): boolean =>
 
 export const getErrorStatus = (state: State): boolean =>
   state[NameSpace.Offers].hasError;
+
+export const getNearbyOffers = (state: State):OfferPreview[] =>
+  state[NameSpace.Offers].nearbyOffers;
+
+export const getNearbyOffersLoadingStatus = (state : State) : boolean =>
+  state[NameSpace.Offers].isNearbyOffersLoading;

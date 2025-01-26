@@ -1,18 +1,28 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {loadOffers} from '../api-actions.ts';
-import {OfferPreview} from '../../types/offer.ts';
+import {fetchNearbyOffers, fetchOfferDetails, fetchOffers} from '../api-actions.ts';
+import {OfferDetail, OfferPreview} from '../../types/offer.ts';
 import {NameSpace} from '../../const.ts';
 
 type OfferData = {
   offers: OfferPreview[];
   isOffersDataLoading: boolean;
   hasError: boolean;
+  loading: boolean;
+  offerDetail: OfferDetail | null;
+  error: string | null;
+  nearbyOffers: OfferPreview[];
+  isNearbyOffersLoading: boolean;
 };
 
 const initialState: OfferData = {
   offers: [],
   isOffersDataLoading: false,
   hasError: false,
+  loading: false,
+  offerDetail: null,
+  error: null,
+  nearbyOffers: [],
+  isNearbyOffersLoading: false,
 };
 
 export const offersSlice = createSlice({
@@ -21,17 +31,38 @@ export const offersSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(loadOffers.pending, (state) => {
+      .addCase(fetchOffers.pending, (state) => {
         state.isOffersDataLoading = true;
         state.hasError = false;
       })
-      .addCase(loadOffers.fulfilled, (state, action) => {
+      .addCase(fetchOffers.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersDataLoading = false;
       })
-      .addCase(loadOffers.rejected, (state) => {
+      .addCase(fetchOffers.rejected, (state) => {
         state.isOffersDataLoading = false;
         state.hasError = true;
+      })
+      .addCase(fetchOfferDetails.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchOfferDetails.fulfilled, (state, action) => {
+        state.offerDetail = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchOfferDetails.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchNearbyOffers.pending, (state) => {
+        state.isNearbyOffersLoading = true;
+      })
+      .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
+        state.nearbyOffers = action.payload;
+        state.isNearbyOffersLoading = false;
+      })
+      .addCase(fetchNearbyOffers.rejected, (state) => {
+        state.nearbyOffers = [];
+        state.isNearbyOffersLoading = false;
       });
   }
 });

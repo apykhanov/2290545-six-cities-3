@@ -44,6 +44,7 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Comments = '/comments',
+  Nearby = 'nearbyOffers',
 }
 
 export const DateFormat = {

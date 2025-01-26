@@ -1,5 +1,5 @@
 
-import {loadOffers} from '../../store/api-actions';
+import {fetchOffers} from '../../store/api-actions';
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 
 export default function ErrorScreen(): JSX.Element {
@@ -9,7 +9,7 @@ export default function ErrorScreen(): JSX.Element {
       <p>Не удалось загрузить предложения</p>
       <button
         onClick={() => {
-          dispatch(loadOffers());
+          dispatch(fetchOffers());
         }}
         type="button"
       >

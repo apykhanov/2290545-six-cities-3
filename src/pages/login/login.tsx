@@ -1,8 +1,6 @@
-import {FormEvent, useRef, useState} from 'react';
+import {FormEvent, useRef} from 'react';
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
-import {useNavigate} from 'react-router-dom';
 import {loginAction} from '../../store/api-actions.ts';
-import {AppRoute} from '../../const.ts';
 import {toast} from 'react-toastify';
 import {getLoginRequestLoading} from '../../store/user-process/selector.ts';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
@@ -12,21 +10,19 @@ export default function Login() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const isLoading = useAppSelector(getLoginRequestLoading);
-  const [password, setPassword] = useState('');
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
 
   function validatePassword() {
     const re = /^(?=.*[a-zA-Z])(?=.*\d).{2,}$/;
-    return re.test(password);
+    return re.test(passwordRef?.current?.value || '');
   }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (!validatePassword) {
+    if (!validatePassword()) {
       toast.warn('Пароль должен содержать хотя бы одну букву и одну цифру.');
       return;
     }
@@ -34,7 +30,7 @@ export default function Login() {
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
         login: loginRef.current.value,
-        password: passwordRef.current.value.trim()
+        password: passwordRef.current.value
       }));
     }
   };
@@ -68,15 +64,12 @@ export default function Login() {
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button
               className="login__submit form__submit button"
               type="submit"
               disabled={isLoading}
-              onClick={() => navigate(AppRoute.Root)}
             >
               {isLoading ? 'Loading...' : 'Sign in'}
             </button>
