@@ -1,4 +1,4 @@
-import {ChangeEvent, Fragment, useState} from 'react';
+import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import {MAX_COMMENTS_LENGTH, MIN_COMMENTS_LENGTH} from '../../const.ts';
 
 const ratingMap = {
@@ -25,8 +25,18 @@ export default function ReviewForm(): JSX.Element {
     setRating(evt.target.value);
   }
 
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+  };
+
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {Object.entries(ratingMap)
