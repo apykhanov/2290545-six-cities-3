@@ -1,27 +1,28 @@
 import Logo from '../logo/logo.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
-import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
-import {useAppSelector} from '../../hook/use-app-selector.tsx';
-import {getAuthCheckedStatus, getUser} from '../../store/user-process/selector.ts';
-import {getOfferDataLoadingStatus} from '../../store/offers/selector.ts';
-import {logoutAction} from '../../store/api-actions.ts';
+// import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
+// import {useAppSelector} from '../../hook/use-app-selector.tsx';
+// import {getUser} from '../../store/user-process/selector.ts';
+// import {getAuthCheckedStatus, getUser} from '../../store/user-process/selector.ts';
+// import {getOfferDataLoadingStatus} from '../../store/offers/selector.ts';
+// import {logoutAction} from '../../store/api-actions.ts';
 
 
-type HeaderProps = {
-  withNav?: boolean;
-}
+// type HeaderProps = {
+//   withNav?: boolean;
+// }
 
-export default function Header({withNav = true}: HeaderProps) {
-  const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(getAuthCheckedStatus);
-  const fetchingStatus = useAppSelector(getOfferDataLoadingStatus);
-  const user = useAppSelector(getUser);
+export default function Header() {
+  // const dispatch = useAppDispatch();
+  // const isAuth = useAppSelector(getAuthCheckedStatus);
+  // const fetchingStatus = useAppSelector(getOfferDataLoadingStatus);
+  // const user = useAppSelector(getUser);
 
-  const handleLogoutClick = (evt: MouseEvent) => {
-    evt.preventDefault();
-    dispatch(logoutAction());
-  };
+  // const handleLogoutClick = (evt: MouseEvent) => {
+  //   evt.preventDefault();
+  //   dispatch(logoutAction());
+  // };
 
   return (
     <div className="header__wrapper">
@@ -35,7 +36,7 @@ export default function Header({withNav = true}: HeaderProps) {
             <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
-              <span className="header__user-name user__name">{user.email}</span>
+              {/*<span className="header__user-name user__name">{user.email}</span>*/}
               <span className="header__favorite-count">3</span>
             </Link>
           </li>

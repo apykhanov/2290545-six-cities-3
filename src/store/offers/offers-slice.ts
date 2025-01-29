@@ -12,6 +12,7 @@ type OfferData = {
   error: string | null;
   nearbyOffers: OfferPreview[];
   isNearbyOffersLoading: boolean;
+  isOfferDetailLoading: boolean;
 };
 
 const initialState: OfferData = {
@@ -23,6 +24,7 @@ const initialState: OfferData = {
   error: null,
   nearbyOffers: [],
   isNearbyOffersLoading: false,
+  isOfferDetailLoading: false,
 };
 
 export const offersSlice = createSlice({
@@ -44,7 +46,7 @@ export const offersSlice = createSlice({
         state.hasError = true;
       })
       .addCase(fetchOfferDetails.pending, (state) => {
-        state.loading = true;
+        state.isOfferDetailLoading = true;
       })
       .addCase(fetchOfferDetails.fulfilled, (state, action) => {
         state.offerDetail = action.payload;

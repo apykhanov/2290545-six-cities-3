@@ -7,14 +7,16 @@ import {useAppSelector} from './hook/use-app-selector.tsx';
 import FullPageLoader from './components/full-page-loader/full-page-loader.tsx';
 import browserHistory from './browserHistory/browserHistory.ts';
 import HistoryRouter from './components/HistoryRouter/HistoryRouter.tsx';
-import {getAuthCheckedStatus, getAuthorizationStatus} from './store/user-process/selector.ts';
+// import {getAuthCheckedStatus, getAuthorizationStatus} from './store/user-process/selector.ts';
 import {getErrorStatus, getOfferDataLoadingStatus} from './store/offers/selector.ts';
 import ErrorScreen from './components/error-screen/error-screen.tsx';
+import CardOffer from './pages/card-offer/card-offer.tsx';
+import {getAuthorizationStatus} from './store/user-process/selector.ts';
 
 
 export default function App() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  // const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isOffersDataLoading = useAppSelector(getOfferDataLoadingStatus);
   const hasError = useAppSelector(getErrorStatus);
 
@@ -35,10 +37,10 @@ export default function App() {
           path={AppRoute.Root}
           element={<Main />}
         />
-        {/*<Route*/}
-        {/*  path={`${AppRoute.cardOffer}/:id`}*/}
-        {/*  element={<CardOffer offers={offers} reviews={reviews}/>}*/}
-        {/*/>*/}
+        <Route
+          path={`${AppRoute.cardOffer}/:id`}
+          element={<CardOffer/>}
+        />
         <Route
           path={AppRoute.Login}
           element={<Login />}

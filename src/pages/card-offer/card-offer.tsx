@@ -1,36 +1,52 @@
+import {useParams} from 'react-router-dom';
+import {useEffect} from 'react';
+import Spinner from '../../components/spinner/spinner.tsx';
+import {useAppSelector} from '../../hook/use-app-selector.tsx';
+import {
+  getNearbyOffers,
+  getNearbyOffersLoadingStatus,
+  getOfferDataLoadingStatus,
+  getOfferDetail
+} from '../../store/offers/selector.ts';
+import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
+import {fetchNearbyOffers, fetchOfferComments, fetchOfferDetails} from '../../store/api-actions.ts';
 import Header from '../../components/header/header.tsx';
-import ReviewForm from '../../components/review-form/review-form.tsx';
-import {AppRoute, housing} from '../../const.ts';
-import {OfferPreview} from '../../types/offer.ts';
 import {getRatingStarsStyle} from '../../utils/utils.ts';
-import {Navigate, useParams} from 'react-router-dom';
-import {Review} from '../../types/review.ts';
+import {housing} from '../../const.ts';
 import {ReviewItem} from '../../components/review-item/review-item.tsx';
+import ReviewForm from '../../components/review-form/review-form.tsx';
 import Card from '../../components/card/card.tsx';
-import Map from '../../components/map/map.tsx';
-import {useActiveCard} from '../../hook/use-active-card.tsx';
+import {getComments, getCommentsLoadingStatus} from '../../store/comments/selector.ts';
+
 
 const MAX_NEAR_OFFERS_AMOUNT = 3;
 const MAX_IMAGES_AMOUNT = 6;
 
-type CardOfferProps = {
-  reviews: Review[];
-  offers: OfferPreview[];
-}
 
-export default function CardOffer({reviews, offers}: CardOfferProps) {
+export default function CardOffer() {
+  const {id} = useParams< { id : string }>();
+  const dispatch = useAppDispatch();
+  const offerDetail = useAppSelector(getOfferDetail);
+  const isOfferDetailLoading = useAppSelector(getOfferDataLoadingStatus);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isNearbyOffersLoading = useAppSelector(getNearbyOffersLoadingStatus);
+  const reviews = useAppSelector(getComments);
+  const IsReviewLoading = useAppSelector(getCommentsLoadingStatus);
 
-  const {id} = useParams();
-  const currentOffer = cardOffers.find((item) => item.id === id);
-  const {activeCard, setActiveCard} = useActiveCard();
 
-  if (!currentOffer) {
-    return <Navigate to={AppRoute.NotFound} />;
+  useEffect(() => {
+    dispatch(fetchOfferDetails(id));
+    dispatch(fetchNearbyOffers(id));
+    dispatch(fetchOfferComments(id));
+  }, [dispatch, id]);
+
+  if (isOfferDetailLoading || IsReviewLoading || isNearbyOffersLoading || !offerDetail){
+    return <Spinner />;
   }
-
-  const {images, title, rating, type, price, host,
-    bedrooms, maxAdults, goods} = currentOffer;
-
+  const {
+    images, rating, type, bedrooms,
+    maxAdults, price, goods, host, title
+  } = offerDetail;
 
   return (
     <div className="page">
@@ -105,20 +121,20 @@ export default function CardOffer({reviews, offers}: CardOfferProps) {
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the
-                    unique lightness of Amsterdam. The building is green and from
-                    18th century.
+                  A quiet cozy and picturesque that hides behind a a river by the
+                  unique lightness of Amsterdam. The building is green and from
+                  18th century.
                   </p>
                   <p className="offer__text">
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
+                  An independent House, strategically located between Rembrandt
+                  Square and National Opera, but where the bustle of the city
+                  comes to rest in this alley flowery and colorful.
                   </p>
                 </div>
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">{reviews.length}</span>
+                Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ul className="reviews__list">
                   {reviews.map((review) => (
@@ -130,17 +146,17 @@ export default function CardOffer({reviews, offers}: CardOfferProps) {
             </div>
           </div>
           <section className="offer__map map">
-            <Map offers={offers} activeCard={activeCard} isNearby/>
+            {/*<Map offers={offers} activeCard={activeCard} isNearby/>*/}
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">
-              Other places in the neighbourhood
+            Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {offers.slice(0, MAX_NEAR_OFFERS_AMOUNT).map((offer) => (
-                <Card offer={offer} key={offer.id} setCurrentCard={(newActiveCard) => setActiveCard(newActiveCard)} />
+              {nearbyOffers.slice(0, MAX_NEAR_OFFERS_AMOUNT).map((offer) => (
+                <Card offer={offer} key={offer.id} />
               ))}
             </div>
           </section>

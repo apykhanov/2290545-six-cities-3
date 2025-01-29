@@ -6,14 +6,14 @@ import {getRatingStarsStyle} from '../../utils/utils.ts';
 
 type CardProps = {
   offer: OfferPreview;
-  setCurrentCard: (offer: OfferPreview) => void;
+  setCurrentCard?: (offer: OfferPreview) => void;
 };
 
 export default function Card({offer, setCurrentCard}: CardProps) {
   const {previewImage, title, type, rating, price, id} = offer;
 
   const handleCardOver = () => {
-    setCurrentCard(offer);
+    setCurrentCard?.(offer);
   };
 
   return (

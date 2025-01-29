@@ -1,4 +1,4 @@
-import {rootReducer} from '../root-reduсer.ts';
+import {rootReducer} from '../root-reducer.ts';
 import {Middleware, PayloadAction} from '@reduxjs/toolkit';
 import browserHistory from '../../browserHistory/browserHistory.ts';
 

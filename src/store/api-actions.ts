@@ -4,13 +4,15 @@ import {ThunkOptions} from '../types/state.ts';
 import {APIRoute} from '../const.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {AuthData, UserData} from '../types/userData.ts';
-import {AxiosInstance} from 'axios';
+import axios, {AxiosInstance} from 'axios';
 import {CommentPost, Review} from '../types/review.ts';
+import {StatusCodes} from 'http-status-codes';
+import {redirectToRoute} from './action.ts';
 
 export const fetchOffers = createAsyncThunk<OfferPreview[], void, { extra: AxiosInstance }>(
   'offers/loadOffers',
-  async (_arg, { extra: api }) => {
-    const { data } = await api.get<OfferPreview[]>(APIRoute.Offers);
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<OfferPreview[]>(APIRoute.Offers);
     return data;
   }
 );
@@ -26,45 +28,53 @@ export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkOption
 export const loginAction = createAsyncThunk<UserData, AuthData, ThunkOptions>(
   'user/login',
   async ({login, password}, {extra: api}) => {
-    const { data } = await api.post<UserData>(APIRoute.Login, {login, password,});
+    const {data} = await api.post<UserData>(APIRoute.Login, {login, password,});
     saveToken(data.token);
     return data;
   });
 
 export const logoutAction = createAsyncThunk<void, undefined, ThunkOptions>(
   'user/logout',
-  async (_arg, { extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
   });
 
-export const fetchOfferDetails = createAsyncThunk<OfferDetail, string, { extra: AxiosInstance }>(
+export const fetchOfferDetails = createAsyncThunk<OfferDetail, string, ThunkOptions>(
   'details/fetchOfferDetails',
-  async (offerId, { extra: api }) => {
-    const { data } = await api.get<OfferDetail>(`${APIRoute.Offers}/${offerId}`);
-    return data;
+  async (offerId, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<OfferDetail>(`${APIRoute.Offers}/${offerId}`);
+      return data;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response?.status === StatusCodes.NOT_FOUND) {
+        dispatch(redirectToRoute);
+      }
+
+      throw error;
+    }
   }
 );
 
-export const fetchOfferComments = createAsyncThunk<Review[], string, { extra: AxiosInstance }>(
+export const fetchOfferComments = createAsyncThunk<Review[], string, ThunkOptions>(
   'comments/fetchOfferComments',
-  async (offerId, { extra: api }) => {
-    const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${offerId}`);
+  async (offerId, {extra: api}) => {
+    const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${offerId}`);
     return data;
   }
 );
-export const sendComment = createAsyncThunk<Review, CommentPost, { extra: AxiosInstance }>(
+export const sendComment = createAsyncThunk<Review, CommentPost, ThunkOptions>(
   'comments/sendComment',
-  async ({ comment, rating, offerId }, { extra: api }) => {
-    const { data } = await api.post<Review>(`${APIRoute.Comments}/${offerId}`, { comment, rating });
+  async ({comment, rating, offerId}, {extra: api}) => {
+    const {data} = await api.post<Review>(`${APIRoute.Comments}/${offerId}`, {comment, rating});
     return data;
   }
 );
 
-export const fetchNearbyOffers = createAsyncThunk<OfferPreview[], string, { extra: AxiosInstance }>(
+export const fetchNearbyOffers = createAsyncThunk<OfferPreview[], string, ThunkOptions>(
   'details/fetchNearbyOffers',
-  async (offerId, { extra: api }) => {
-    const { data } = await api.get<OfferPreview[]>(`${APIRoute.Offers}/${offerId}/nearby`);
+  async (offerId, {extra: api}) => {
+    const {data} = await api.get<OfferPreview[]>(`${APIRoute.Offers}/${offerId}/nearby`);
     return data;
   }
 );
