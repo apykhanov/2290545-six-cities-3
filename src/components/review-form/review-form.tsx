@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import {MAX_COMMENTS_LENGTH, MIN_COMMENTS_LENGTH} from '../../const.ts';
-import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 import {sendComment} from '../../store/api-actions.ts';
+import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 
 const ratingMap = {
   '5': 'perfect',
@@ -30,16 +30,18 @@ export default function ReviewForm(): JSX.Element {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(sendComment());
+    dispatch(sendComment(
+      comment: comment,
+      rating: rating,
+    );
   };
-
 
   return (
     <form
+      onSubmit={handleFormSubmit}
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={handleFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
