@@ -35,9 +35,11 @@ export default function CardOffer() {
 
 
   useEffect(() => {
-    dispatch(fetchOfferDetails(id));
-    dispatch(fetchNearbyOffers(id));
-    dispatch(fetchOfferComments(id));
+    if (id){
+      dispatch(fetchOfferDetails(id));
+      dispatch(fetchNearbyOffers(id));
+      dispatch(fetchOfferComments(id));
+    }
   }, [dispatch, id]);
 
   if (isOfferDetailLoading || IsReviewLoading || isNearbyOffersLoading || !offerDetail){
