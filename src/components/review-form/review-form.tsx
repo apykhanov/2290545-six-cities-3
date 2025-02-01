@@ -2,6 +2,7 @@ import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import {MAX_COMMENTS_LENGTH, MIN_COMMENTS_LENGTH} from '../../const.ts';
 import {sendComment} from '../../store/api-actions.ts';
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
+import {useParams} from 'react-router-dom';
 
 const ratingMap = {
   '5': 'perfect',
@@ -19,6 +20,7 @@ export default function ReviewForm(): JSX.Element {
     comment.length <= MAX_COMMENTS_LENGTH &&
     rating !== '';
   const dispatch = useAppDispatch();
+  const {id} = useParams< { id : string }>();
 
   function handleTextAriaChange(evt: ChangeEvent<HTMLTextAreaElement>) {
     setComment(evt.target.value);
@@ -30,10 +32,11 @@ export default function ReviewForm(): JSX.Element {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(sendComment(
+    dispatch(sendComment({
+      id,
       comment: comment,
       rating: rating,
-    );
+    }));
   };
 
   return (

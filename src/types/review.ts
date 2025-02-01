@@ -10,7 +10,7 @@ export type Review = {
 
 export type CommentPost = {
   comment: string;
-  rating: number;
-  offerId: string;
+  rating: number | string;
+  id: string | undefined;
 }
 
