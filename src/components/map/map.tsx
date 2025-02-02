@@ -9,9 +9,9 @@ const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 
 type MapProps = {
-  activeCard: OfferPreview;
+  activeCardId: OfferPreview['id'];
   offers: OfferPreview[];
-  isNearby?: boolean;
+  className: string;
 };
 
 const defaultCustomIcon = leaflet.icon({
@@ -26,7 +26,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [13, 39]
 });
 
-export default function Map({ offers, activeCard, isNearby}: MapProps) {
+export default function Map({ offers, activeCardId, className}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers[0].city);
 
@@ -41,35 +41,28 @@ export default function Map({ offers, activeCard, isNearby}: MapProps) {
         });
         marker
           .setIcon(
-            activeCard.id === id ? currentCustomIcon : defaultCustomIcon,
+            activeCardId === id ? currentCustomIcon : defaultCustomIcon,
           )
           .addTo(markerLayer);
       });
-
-      if (isNearby) {
-        const marker = new Marker({
-          lat: activeCard.location.latitude,
-          lng: activeCard.location.longitude,
-        });
-        marker.setIcon(currentCustomIcon).addTo(markerLayer);
-      }
 
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeCard, isNearby]);
+  }, [map, offers, activeCardId]);
 
 
   return (
     <section
       style={{
-        height: '100%',
-        minHeight: '500px',
-        width: '100%',
-        maxWidth: '1144px',
-        margin: '0 auto',
+        // height: '100%',
+        // minHeight: '500px',
+        // width: '100%',
+        // maxWidth: '1144px',
+        // margin: '0 auto',
       }}
+      className={`${className} map`}
       ref={mapRef}
     >
     </section>

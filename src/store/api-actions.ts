@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {OfferPreview, OfferDetail} from '../types/offer.ts';
+import {OfferDetail, OfferPreview} from '../types/offer.ts';
 import {ThunkOptions} from '../types/state.ts';
-import {APIRoute} from '../const.ts';
+import {APIRoute, AppRoute} from '../const.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {AuthData, UserData} from '../types/userData.ts';
 import axios, {AxiosInstance} from 'axios';
@@ -27,9 +27,10 @@ export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkOption
 
 export const loginAction = createAsyncThunk<UserData, AuthData, ThunkOptions>(
   'user/login',
-  async ({login, password}, {extra: api}) => {
-    const {data} = await api.post<UserData>(APIRoute.Login, {login, password,});
+  async ({login, password}, {dispatch,extra: api}) => {
+    const {data} = await api.post<UserData>(APIRoute.Login, {email: login, password,});
     saveToken(data.token);
+    dispatch(redirectToRoute(AppRoute.Root));
     return data;
   });
 

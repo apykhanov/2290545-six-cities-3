@@ -42,10 +42,12 @@ export const userProcessSlice = createSlice({
       .addCase(loginAction.fulfilled, (state, action) => {
         state.user = action.payload;
         state.loginStatus = RequestStatus.Success;
+        state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(loginAction.rejected, (state) => {
         state.user = null;
         state.loginStatus = RequestStatus.Error;
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
       });
   }
 });

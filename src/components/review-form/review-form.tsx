@@ -15,10 +15,6 @@ const ratingMap = {
 export default function ReviewForm(): JSX.Element {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('');
-  const isValid =
-    comment.length >= MIN_COMMENTS_LENGTH &&
-    comment.length <= MAX_COMMENTS_LENGTH &&
-    rating !== '';
   const dispatch = useAppDispatch();
   const {id} = useParams< { id : string }>();
 
@@ -32,12 +28,17 @@ export default function ReviewForm(): JSX.Element {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(sendComment({
-      id,
-      comment: comment,
-      rating: rating,
-    }));
+    if (id) {
+      dispatch(sendComment({
+        offerId: id,
+        comment: comment,
+        rating: Number(rating),
+      }));
+    }
   };
+
+  const isValid = comment.length >= MIN_COMMENTS_LENGTH &&
+    comment.length <= MAX_COMMENTS_LENGTH && rating !== '';
 
   return (
     <form
@@ -90,7 +91,7 @@ export default function ReviewForm(): JSX.Element {
           <b className="reviews__text-amount">{MIN_COMMENTS_LENGTH} characters</b>.
         </p>
         <button className="reviews__submit form__submit button"
-          type="submit" disabled={isValid}
+          type="submit" disabled={!isValid}
         >
           Submit
         </button>

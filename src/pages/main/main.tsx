@@ -41,12 +41,10 @@ export default function Main() {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredOffers.length} places to stay in {currentCity}</b>
               <PlaceSorting activeSorting={currentSortType}/>
-              <CardList offers={sortedOffers} setActiveCard={setActiveCard} />
+              <CardList offers={sortedOffers} setActiveCard={setActiveCard}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map offers={filteredOffers} activeCard={activeCard}/>
-              </section>
+              <Map offers={filteredOffers} activeCardId={activeCard.id} className="cities__map"/>
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ export enum AppRoute {
   cardOffer = '/card-offer',
   Root = '/',
   NotFound = '/not-found',
+  Logout = '/logout',
 }
 
 export enum AuthorizationStatus {

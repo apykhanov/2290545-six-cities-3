@@ -4,7 +4,6 @@ import Spinner from '../../components/spinner/spinner.tsx';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {
   getNearbyOffers,
-  getNearbyOffersLoadingStatus,
   getOfferDataLoadingStatus,
   getOfferDetail
 } from '../../store/offers/selector.ts';
@@ -16,7 +15,8 @@ import {housing} from '../../const.ts';
 import {ReviewItem} from '../../components/review-item/review-item.tsx';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import Card from '../../components/card/card.tsx';
-import {getComments, getCommentsLoadingStatus} from '../../store/comments/selector.ts';
+import {getComments} from '../../store/comments/selector.ts';
+import Map from '../../components/map/map.tsx';
 
 
 const MAX_NEAR_OFFERS_AMOUNT = 3;
@@ -29,9 +29,7 @@ export default function CardOffer() {
   const offerDetail = useAppSelector(getOfferDetail);
   const isOfferDetailLoading = useAppSelector(getOfferDataLoadingStatus);
   const nearbyOffers = useAppSelector(getNearbyOffers);
-  const isNearbyOffersLoading = useAppSelector(getNearbyOffersLoadingStatus);
   const reviews = useAppSelector(getComments);
-  const IsReviewLoading = useAppSelector(getCommentsLoadingStatus);
 
 
   useEffect(() => {
@@ -42,13 +40,33 @@ export default function CardOffer() {
     }
   }, [dispatch, id]);
 
-  if (isOfferDetailLoading || IsReviewLoading || isNearbyOffersLoading || !offerDetail){
+  if (isOfferDetailLoading || !offerDetail){
     return <Spinner />;
   }
   const {
-    images, rating, type, bedrooms,
-    maxAdults, price, goods, host, title
+    images,
+    rating,
+    type,
+    bedrooms,
+    maxAdults,
+    price,
+    goods,
+    host,
+    title
   } = offerDetail;
+
+  const offerDetailPreview = {
+    id: offerDetail.id,
+    title: offerDetail.title,
+    type: offerDetail.type,
+    price: offerDetail.price,
+    city: offerDetail.city,
+    location: offerDetail.location,
+    isFavourite: offerDetail.isFavorite,
+    isPremium: offerDetail.isPremium,
+    rating: offerDetail.rating,
+    previewImage: '',
+  };
 
   return (
     <div className="page">
@@ -148,7 +166,7 @@ export default function CardOffer() {
             </div>
           </div>
           <section className="offer__map map">
-            {/*<Map offers={offers} activeCard={activeCard} isNearby/>*/}
+            <Map offers={[...nearbyOffers.slice(0, MAX_NEAR_OFFERS_AMOUNT), offerDetailPreview]} activeCardId={offerDetail.id} className="offer__map" />
           </section>
         </section>
         <div className="container">

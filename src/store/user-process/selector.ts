@@ -9,6 +9,9 @@ export const getAuthorizationStatus = (state: State): AuthorizationStatus =>
 export const getAuthCheckedStatus = (state: State): boolean =>
   state[NameSpace.User].authorizationStatus !== AuthorizationStatus.Unknown;
 
+export const geIsAuth = (state: State): boolean =>
+  state[NameSpace.User].authorizationStatus !== AuthorizationStatus.Auth;
+
 export const getLoginRequestLoading = (state: State): boolean =>
   state[NameSpace.User].loginStatus === RequestStatus.Loading;
 
