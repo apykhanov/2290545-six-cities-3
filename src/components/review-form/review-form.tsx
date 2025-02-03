@@ -1,10 +1,11 @@
-import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
-import {MAX_COMMENTS_LENGTH, MIN_COMMENTS_LENGTH} from '../../const.ts';
-import {sendComment} from '../../store/api-actions.ts';
-import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
-import {useParams} from 'react-router-dom';
-import {useAppSelector} from '../../hook/use-app-selector.tsx';
-import {sendCommentsLoadingStatus} from '../../store/comments/selector.ts';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
+import { MAX_COMMENTS_LENGTH, MIN_COMMENTS_LENGTH } from '../../const.ts';
+import { sendComment } from '../../store/api-actions.ts';
+import { useAppDispatch } from '../../hook/use-app-dispatch.tsx';
+import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hook/use-app-selector.tsx';
+import { sendCommentsLoadingStatus } from '../../store/comments/selector.ts';
+import { toast } from 'react-toastify';
 
 const ratingMap = {
   '5': 'perfect',
@@ -18,7 +19,7 @@ export default function ReviewForm(): JSX.Element {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('');
   const dispatch = useAppDispatch();
-  const {id} = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
   const isLoading = useAppSelector(sendCommentsLoadingStatus);
 
   function handleTextAriaChange(evt: ChangeEvent<HTMLTextAreaElement>) {
@@ -29,21 +30,29 @@ export default function ReviewForm(): JSX.Element {
     setRating(evt.target.value);
   }
 
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (id) {
-      dispatch(sendComment({
+    if (!id) {
+      toast.error('ID предложения не найден');
+      return;
+    }
+    try {
+      await dispatch(sendComment({
         offerId: id,
         comment: comment,
         rating: Number(rating),
-      }));
-      setComment('');
+      })).unwrap();
       setRating('');
+      setComment('');
+    } catch {
+      toast.error('Комментарий не отправился');
     }
   };
 
+  const isValidRating = ['1', '2', '3', '4', '5'].includes(rating);
   const isValid = comment.length >= MIN_COMMENTS_LENGTH &&
-    comment.length <= MAX_COMMENTS_LENGTH && rating !== '';
+    comment.length <= MAX_COMMENTS_LENGTH &&
+    isValidRating;
 
   return (
     <form

@@ -10,9 +10,20 @@ type CardProps = {
 };
 
 export default function Card({offer, setCurrentCard}: CardProps) {
-  const {previewImage, title, type, rating, price, id} = offer;
+  const {
+    previewImage,
+    title,
+    type,
+    rating,
+    price,
+    id
+  } = offer;
 
   const handleCardOver = () => {
+    setCurrentCard?.(offer);
+  };
+
+  const handleCardLeave = () => {
     setCurrentCard?.(offer);
   };
 
@@ -21,7 +32,11 @@ export default function Card({offer, setCurrentCard}: CardProps) {
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper" onMouseOver={handleCardOver}>
+      <div
+        className="cities__image-wrapper place-card__image-wrapper"
+        onMouseOver={handleCardOver}
+        onMouseLeave={handleCardLeave}
+      >
         <Link to={`${AppRoute.cardOffer}/${id}`}>
           <img className="place-card__image"
             src={previewImage}
