@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
-import {geIsAuth, getUser} from '../../store/user-process/selector.ts';
+import {getIsAuth, getUser} from '../../store/user-process/selector.ts';
 import {logoutAction} from '../../store/api-actions.ts';
 import {Fragment, MouseEvent} from 'react';
 
@@ -14,7 +14,7 @@ type HeaderProps = {
 
 export default function Header({withNav = true }: HeaderProps) {
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(geIsAuth);
+  const isAuth = useAppSelector(getIsAuth);
   const user = useAppSelector(getUser);
 
 

@@ -3,6 +3,8 @@ import {MAX_COMMENTS_LENGTH, MIN_COMMENTS_LENGTH} from '../../const.ts';
 import {sendComment} from '../../store/api-actions.ts';
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 import {useParams} from 'react-router-dom';
+import {useAppSelector} from '../../hook/use-app-selector.tsx';
+import {sendCommentsLoadingStatus} from '../../store/comments/selector.ts';
 
 const ratingMap = {
   '5': 'perfect',
@@ -16,7 +18,8 @@ export default function ReviewForm(): JSX.Element {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('');
   const dispatch = useAppDispatch();
-  const {id} = useParams< { id : string }>();
+  const {id} = useParams<{ id: string }>();
+  const isLoading = useAppSelector(sendCommentsLoadingStatus);
 
   function handleTextAriaChange(evt: ChangeEvent<HTMLTextAreaElement>) {
     setComment(evt.target.value);
@@ -34,6 +37,8 @@ export default function ReviewForm(): JSX.Element {
         comment: comment,
         rating: Number(rating),
       }));
+      setComment('');
+      setRating('');
     }
   };
 
@@ -61,6 +66,7 @@ export default function ReviewForm(): JSX.Element {
                 type="radio"
                 checked={rating === score}
                 onChange={handleInputChange}
+                disabled={isLoading}
               />
               <label
                 htmlFor={`${score}-stars`}
@@ -68,7 +74,7 @@ export default function ReviewForm(): JSX.Element {
                 title={title}
               >
                 <svg className="form__star-image" width={37} height={33}>
-                  <use xlinkHref="#icon-star" />
+                  <use xlinkHref="#icon-star"/>
                 </svg>
               </label>
             </Fragment>
@@ -81,19 +87,19 @@ export default function ReviewForm(): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
         onChange={handleTextAriaChange}
+        disabled={isLoading}
       />
-
-
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-            To submit review please make sure to set
+          To submit review please make sure to set
           <span className="reviews__star">rating</span> and describe your stay with at least{' '}
           <b className="reviews__text-amount">{MIN_COMMENTS_LENGTH} characters</b>.
         </p>
         <button className="reviews__submit form__submit button"
-          type="submit" disabled={!isValid}
+          type="submit"
+          disabled={!isValid || isLoading}
         >
-          Submit
+          {isLoading ? 'Loading...' : 'Submit'}
         </button>
       </div>
     </form>

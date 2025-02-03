@@ -4,6 +4,7 @@ import {fetchOfferComments, sendComment} from '../api-actions.ts';
 import {NameSpace} from '../../const.ts';
 import {RequestStatus} from '../../types/state.ts';
 
+
 type CommentsSlice = {
   comments: Review[];
   commentsStatus: RequestStatus;
@@ -42,5 +43,6 @@ export const commentsSlice = createSlice({
       .addCase(sendComment.rejected, (state) => {
         state.sendCommentStatus = RequestStatus.Error;
       });
+
   },
 });

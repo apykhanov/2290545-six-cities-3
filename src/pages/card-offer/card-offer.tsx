@@ -62,7 +62,7 @@ export default function CardOffer() {
     price: offerDetail.price,
     city: offerDetail.city,
     location: offerDetail.location,
-    isFavourite: offerDetail.isFavorite,
+    isFavorite: offerDetail.isFavorite,
     isPremium: offerDetail.isPremium,
     rating: offerDetail.rating,
     previewImage: '',
