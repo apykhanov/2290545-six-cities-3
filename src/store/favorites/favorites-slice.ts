@@ -5,12 +5,12 @@ import {createSlice} from '@reduxjs/toolkit';
 import {fetchFavoriteOffers} from '../api-actions.ts';
 
 
-type favoritesSlice = {
+type FavoritesSlice = {
   favorites: OfferPreview[];
   favoritesLoadingStatus: RequestStatus;
 }
 
-const initialState: favoritesSlice = {
+const initialState: FavoritesSlice = {
   favorites: [],
   favoritesLoadingStatus: RequestStatus.Idle,
 };
