@@ -7,16 +7,16 @@ import {useAppSelector} from './hook/use-app-selector.tsx';
 import FullPageLoader from './components/full-page-loader/full-page-loader.tsx';
 import browserHistory from './browserHistory/browserHistory.ts';
 import HistoryRouter from './components/HistoryRouter/HistoryRouter.tsx';
-// import {getAuthCheckedStatus, getAuthorizationStatus} from './store/user-process/selector.ts';
 import {getErrorStatus, getOfferDataLoadingStatus} from './store/offers/selector.ts';
 import ErrorScreen from './components/error-screen/error-screen.tsx';
 import CardOffer from './pages/card-offer/card-offer.tsx';
 import {getAuthorizationStatus} from './store/user-process/selector.ts';
+import PrivateRoute from './components/private-route/private-route.tsx';
+import Favorites from './pages/favorites/favorites.tsx';
 
 
 export default function App() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  // const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isOffersDataLoading = useAppSelector(getOfferDataLoadingStatus);
   const hasError = useAppSelector(getErrorStatus);
 
@@ -29,6 +29,7 @@ export default function App() {
     return (
       <ErrorScreen />);
   }
+
 
   return (
     <HistoryRouter history={browserHistory}>
@@ -45,16 +46,14 @@ export default function App() {
           path={AppRoute.Login}
           element={<Login />}
         />
-        {/*<Route*/}
-        {/*  path={AppRoute.Favorites}*/}
-        {/*  element={*/}
-        {/*    <PrivateRoute*/}
-        {/*      authorizationStatus={AuthorizationStatus.Auth}*/}
-        {/*    >*/}
-        {/*      <Favorites offers={offers} />*/}
-        {/*    </PrivateRoute>*/}
-        {/*  }*/}
-        {/*/>*/}
+        <Route
+          path={AppRoute.Favorites}
+          element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <Favorites />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="*"
           element={<NotFound />}

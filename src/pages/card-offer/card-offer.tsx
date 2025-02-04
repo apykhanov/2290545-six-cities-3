@@ -1,6 +1,5 @@
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
-import Spinner from '../../components/spinner/spinner.tsx';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {
   getNearbyOffers,
@@ -17,6 +16,7 @@ import ReviewForm from '../../components/review-form/review-form.tsx';
 import Card from '../../components/card/card.tsx';
 import {getComments} from '../../store/comments/selector.ts';
 import Map from '../../components/map/map.tsx';
+import FullPageLoader from '../../components/full-page-loader/full-page-loader.tsx';
 
 
 const MAX_NEAR_OFFERS_AMOUNT = 3;
@@ -41,7 +41,7 @@ export default function CardOffer() {
   }, [dispatch, id]);
 
   if (isOfferDetailLoading || !offerDetail){
-    return <Spinner />;
+    return <FullPageLoader />;
   }
   const {
     images,

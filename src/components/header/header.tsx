@@ -6,6 +6,7 @@ import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {getIsAuth, getUser} from '../../store/user-process/selector.ts';
 import {logoutAction} from '../../store/api-actions.ts';
 import {Fragment, MouseEvent} from 'react';
+import {getFavorites} from '../../store/favorites/selector.ts';
 
 
 type HeaderProps = {
@@ -16,6 +17,7 @@ export default function Header({withNav = true }: HeaderProps) {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getIsAuth);
   const user = useAppSelector(getUser);
+  const favorites = useAppSelector(getFavorites);
 
 
   const handleLogoutClick = (evt: MouseEvent) => {
@@ -39,7 +41,7 @@ export default function Header({withNav = true }: HeaderProps) {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">{user?.email}</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__favorite-count">{favorites?.length}</span>
                   </Link>
                 </li>
                 <li className="header__nav-item">

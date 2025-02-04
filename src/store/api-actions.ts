@@ -79,3 +79,11 @@ export const fetchNearbyOffers = createAsyncThunk<OfferPreview[], string, ThunkO
     return data;
   }
 );
+
+export const fetchFavoriteOffers = createAsyncThunk<OfferPreview[], void, { extra: AxiosInstance }>(
+  'offers/fetchFavoriteOffers',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<OfferPreview[]>(APIRoute.Favorites);
+    return data;
+  }
+);
