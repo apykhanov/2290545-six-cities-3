@@ -13,6 +13,7 @@ type OfferData = {
   nearbyOffers: OfferPreview[];
   isNearbyOffersLoading: boolean;
   isOfferDetailLoading: boolean;
+  isFavoriteLoading: boolean;
 };
 
 const initialState: OfferData = {
@@ -25,6 +26,7 @@ const initialState: OfferData = {
   nearbyOffers: [],
   isNearbyOffersLoading: false,
   isOfferDetailLoading: false,
+  isFavoriteLoading: false,
 };
 
 export const offersSlice = createSlice({

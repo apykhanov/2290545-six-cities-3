@@ -46,6 +46,7 @@ export enum APIRoute {
   Logout = '/logout',
   Comments = '/comments',
   Nearby = 'nearbyOffers',
+  Favorites = '/favorite',
 }
 
 export const DateFormat = {
@@ -58,6 +59,7 @@ export enum NameSpace {
   Offers = 'OFFER',
   Comments = 'COMMENTS',
   App = 'APP',
+  Favorites = 'FAVORITES',
 }
 export const DEFAULT_CITY = 'Paris';
 export const DEFAULT_SORTING = 'Popular';
