@@ -11,3 +11,10 @@ export type ThunkOptions = {
   state: State;
   extra: AxiosInstance;
 }
+
+export enum RequestStatus {
+  Idle = 'IDLE',
+  Loading = 'LOADING',
+  Error = 'ERROR',
+  Success = 'SUCCESS',
+}

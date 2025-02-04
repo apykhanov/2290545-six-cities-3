@@ -5,14 +5,16 @@ import Header from '../../components/header/header.tsx';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {useActiveCard} from '../../hook/use-active-card.tsx';
 import PlaceSorting from '../../components/place-sorting/place-sorting.tsx';
+import {getOffers} from '../../store/offers/selector.ts';
 import {sorting} from '../../utils/utils.ts';
+import {getCurrentCity, getCurrentSort} from '../../store/app/selector.ts';
 
 
 export default function Main() {
-  const currentCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector(getCurrentCity);
+  const offers = useAppSelector(getOffers);
   const filteredOffers = offers.filter((offer) => offer.city.name === currentCity);
-  const currentSortType = useAppSelector((state)=> state.sortTypes);
+  const currentSortType = useAppSelector(getCurrentSort);
   const sortedOffers = sorting[currentSortType](filteredOffers);
 
   const {activeCard, setActiveCard} = useActiveCard();
@@ -39,12 +41,10 @@ export default function Main() {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredOffers.length} places to stay in {currentCity}</b>
               <PlaceSorting activeSorting={currentSortType}/>
-              <CardList offers={sortedOffers} setActiveCard={setActiveCard} />
+              <CardList offers={sortedOffers} setActiveCard={setActiveCard}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map offers={filteredOffers} activeCard={activeCard}/>
-              </section>
+              <Map offers={filteredOffers} activeCardId={activeCard.id} className="cities__map"/>
             </div>
           </div>
         </div>

@@ -49,3 +49,4 @@ export type OfferDetail = {
   images: Images;
   maxAdults: number;
 }
+

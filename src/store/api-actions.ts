@@ -1,50 +1,81 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {OfferPreview} from '../types/offer.ts';
-import {loadOffers, requireAuthorization, setOfferDataLoadingStatus} from './action.ts';
+import {OfferDetail, OfferPreview} from '../types/offer.ts';
 import {ThunkOptions} from '../types/state.ts';
-import {APIRoute, AuthorizationStatus} from '../const.ts';
-import {AuthData} from '../types/authData.ts';
+import {APIRoute, AppRoute} from '../const.ts';
 import {dropToken, saveToken} from '../services/token.ts';
-import {UserData} from '../types/userData.ts';
+import {AuthData, UserData} from '../types/userData.ts';
+import axios, {AxiosInstance} from 'axios';
+import {CommentPost, Review} from '../types/review.ts';
+import {StatusCodes} from 'http-status-codes';
+import {redirectToRoute} from './action.ts';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, ThunkOptions>(
-  'data/loadOffers',
-  async (_arg, {dispatch, extra: api}) => {
+export const fetchOffers = createAsyncThunk<OfferPreview[], void, { extra: AxiosInstance }>(
+  'offers/loadOffers',
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<OfferPreview[]>(APIRoute.Offers);
-    dispatch(setOfferDataLoadingStatus(true));
-    dispatch(loadOffers(data));
-  },
+    return data;
+  }
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, ThunkOptions>(
+export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkOptions>(
   'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
-    try {
-      await api.get(APIRoute.Login);
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    }
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<UserData>(APIRoute.Login);
+    return data;
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, ThunkOptions>(
+export const loginAction = createAsyncThunk<UserData, AuthData, ThunkOptions>(
   'user/login',
-  async ({login, password}, {dispatch, extra: api}) => {
-    const { data: {token} } = await api.post<UserData>(APIRoute.Login, {
-      login,
-      password,
-    });
-    saveToken(token);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
+  async ({login, password}, {dispatch,extra: api}) => {
+    const {data} = await api.post<UserData>(APIRoute.Login, {email: login, password,});
+    saveToken(data.token);
+    dispatch(redirectToRoute(AppRoute.Root));
+    return data;
   });
 
 export const logoutAction = createAsyncThunk<void, undefined, ThunkOptions>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   });
 
+export const fetchOfferDetails = createAsyncThunk<OfferDetail, string, ThunkOptions>(
+  'details/fetchOfferDetails',
+  async (offerId, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<OfferDetail>(`${APIRoute.Offers}/${offerId}`);
+      return data;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response?.status === StatusCodes.NOT_FOUND) {
+        dispatch(redirectToRoute);
+      }
 
+      throw error;
+    }
+  }
+);
+
+export const fetchOfferComments = createAsyncThunk<Review[], string, ThunkOptions>(
+  'comments/fetchOfferComments',
+  async (offerId, {extra: api}) => {
+    const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${offerId}`);
+    return data;
+  }
+);
+export const sendComment = createAsyncThunk<Review, CommentPost, ThunkOptions>(
+  'comments/sendComment',
+  async ({comment, rating, offerId}, {extra: api}) => {
+    const {data} = await api.post<Review>(`${APIRoute.Comments}/${offerId}`, {comment, rating});
+    return data;
+  }
+);
+
+export const fetchNearbyOffers = createAsyncThunk<OfferPreview[], string, ThunkOptions>(
+  'details/fetchNearbyOffers',
+  async (offerId, {extra: api}) => {
+    const {data} = await api.get<OfferPreview[]>(`${APIRoute.Offers}/${offerId}/nearby`);
+    return data;
+  }
+);
