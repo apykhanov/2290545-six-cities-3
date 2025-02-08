@@ -34,9 +34,11 @@ export const userProcessSlice = createSlice({
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(checkAuthAction.rejected, (state) => {
+        state.user = null;
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.pending, (state) => {
+        state.user = null;
         state.loginStatus = RequestStatus.Loading;
       })
       .addCase(loginAction.fulfilled, (state, action) => {

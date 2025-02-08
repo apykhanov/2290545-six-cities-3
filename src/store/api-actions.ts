@@ -4,12 +4,12 @@ import {ThunkOptions} from '../types/state.ts';
 import {APIRoute, AppRoute} from '../const.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {AuthData, UserData} from '../types/userData.ts';
-import axios, {AxiosInstance} from 'axios';
+import axios from 'axios';
 import {CommentPost, Review} from '../types/review.ts';
 import {StatusCodes} from 'http-status-codes';
 import {redirectToRoute} from './action.ts';
 
-export const fetchOffers = createAsyncThunk<OfferPreview[], void, { extra: AxiosInstance }>(
+export const fetchOffers = createAsyncThunk<OfferPreview[], void, ThunkOptions>(
   'offers/loadOffers',
   async (_arg, {extra: api}) => {
     const {data} = await api.get<OfferPreview[]>(APIRoute.Offers);
@@ -49,7 +49,7 @@ export const fetchOfferDetails = createAsyncThunk<OfferDetail, string, ThunkOpti
       return data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response?.status === StatusCodes.NOT_FOUND) {
-        dispatch(redirectToRoute);
+        dispatch(redirectToRoute(AppRoute.NotFound));
       }
 
       throw error;
@@ -80,10 +80,30 @@ export const fetchNearbyOffers = createAsyncThunk<OfferPreview[], string, ThunkO
   }
 );
 
-export const fetchFavoriteOffers = createAsyncThunk<OfferPreview[], void, { extra: AxiosInstance }>(
+export const fetchFavoriteOffers = createAsyncThunk<OfferPreview[], void, ThunkOptions>(
   'offers/fetchFavoriteOffers',
   async (_arg, {extra: api}) => {
     const {data} = await api.get<OfferPreview[]>(APIRoute.Favorites);
     return data;
   }
 );
+
+export const addFavorite = createAsyncThunk<OfferPreview, undefined, ThunkOptions>(
+  'favorites/addFavorite',
+  async (offerId, {extra: api}) => {
+    const {data} = await api.post<OfferPreview>(
+      `${APIRoute.Favorites}/${offerId}/.add`
+    );
+
+    return data;
+  });
+
+export const deleteFavorite = createAsyncThunk<OfferPreview, undefined, ThunkOptions>(
+  'favorites/addFavorite',
+  async (offerId, {extra: api}) => {
+    const {data} = await api.post<OfferPreview>(
+      `${APIRoute.Favorites}/${offerId}/.delete`
+    );
+
+    return data;
+  });

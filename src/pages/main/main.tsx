@@ -8,6 +8,7 @@ import PlaceSorting from '../../components/place-sorting/place-sorting.tsx';
 import {getOffers} from '../../store/offers/selector.ts';
 import {sorting} from '../../utils/utils.ts';
 import {getCurrentCity, getCurrentSort} from '../../store/app/selector.ts';
+import {MainEmpty} from '../main-empty/main-empty.tsx';
 
 
 export default function Main() {
@@ -18,6 +19,10 @@ export default function Main() {
   const sortedOffers = sorting[currentSortType](filteredOffers);
 
   const {activeCard, setActiveCard} = useActiveCard();
+
+  if (offers.length === 0){
+    return <MainEmpty location={currentCity}/>;
+  }
 
 
   return (
