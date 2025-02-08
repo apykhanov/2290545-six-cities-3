@@ -34,7 +34,7 @@ export function BookmarkButton({ id, isActive, block, size = 'small' }: Bookmark
       return;
     }
 
-    if (isActive &&) {
+    if (isActive) {
       dispatch(deleteFavorite(id));
     } else {
       dispatch(addFavorite(id));
