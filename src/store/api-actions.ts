@@ -88,21 +88,21 @@ export const fetchFavoriteOffers = createAsyncThunk<OfferPreview[], void, ThunkO
   }
 );
 
-export const addFavorite = createAsyncThunk<OfferPreview, undefined, ThunkOptions>(
+export const addFavorite = createAsyncThunk<OfferPreview, string, ThunkOptions>(
   'favorites/addFavorite',
   async (offerId, {extra: api}) => {
     const {data} = await api.post<OfferPreview>(
-      `${APIRoute.Favorites}/${offerId}/add`
+      `${APIRoute.Favorites}/${offerId}/1`
     );
 
     return data;
   });
 
-export const deleteFavorite = createAsyncThunk<OfferPreview, undefined, ThunkOptions>(
+export const deleteFavorite = createAsyncThunk<OfferPreview, string, ThunkOptions>(
   'favorites/addFavorite',
   async (offerId, {extra: api}) => {
     const {data} = await api.post<OfferPreview>(
-      `${APIRoute.Favorites}/${offerId}/delete`
+      `${APIRoute.Favorites}/${offerId}/0`
     );
 
     return data;
