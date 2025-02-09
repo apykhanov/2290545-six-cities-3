@@ -50,9 +50,9 @@ export function BookmarkButton({ id, isActive, block, size = 'small' }: Bookmark
       onClick={handleButtonClick}
     >
       <svg className={`${block}__bookmark-icon`} {...sizeMap[size]} />
-      <use xlinkHref="#icon-bookmark"></use>
+      <use xlinkHref="#icon-bookmark"/>
       <span className="visually-hidden">
-        {isActive && isAuth ? 'In bookmarks' : 'To bookmarks'}
+        {isActive && isAuth ? 'In' : 'To'}
       </span>
     </button>
   );

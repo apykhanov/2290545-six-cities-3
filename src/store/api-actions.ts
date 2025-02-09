@@ -99,7 +99,7 @@ export const addFavorite = createAsyncThunk<OfferPreview, string, ThunkOptions>(
   });
 
 export const deleteFavorite = createAsyncThunk<OfferPreview, string, ThunkOptions>(
-  'favorites/addFavorite',
+  'favorites/deleteFavorite',
   async (offerId, {extra: api}) => {
     const {data} = await api.post<OfferPreview>(
       `${APIRoute.Favorites}/${offerId}/0`

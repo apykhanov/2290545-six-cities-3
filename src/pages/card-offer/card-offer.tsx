@@ -17,6 +17,7 @@ import Card from '../../components/card/card.tsx';
 import {getComments} from '../../store/comments/selector.ts';
 import Map from '../../components/map/map.tsx';
 import FullPageLoader from '../../components/full-page-loader/full-page-loader.tsx';
+import {BookmarkButton} from '../../components/bookmark-button/bookmark-button.tsx';
 
 
 const MAX_NEAR_OFFERS_AMOUNT = 3;
@@ -52,7 +53,8 @@ export default function CardOffer() {
     price,
     goods,
     host,
-    title
+    title,
+    isFavorite
   } = offerDetail;
 
   const offerDetailPreview = {
@@ -93,19 +95,14 @@ export default function CardOffer() {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{title}</h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark"/>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton id={offerDetail.id} isActive={isFavorite} block={'offer'} size={'large'}/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
                   <span style={{width: getRatingStarsStyle(rating)}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">{housing[type]}</li>
