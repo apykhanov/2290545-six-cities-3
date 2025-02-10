@@ -54,7 +54,6 @@ export default function CardOffer() {
     goods,
     host,
     title,
-    isFavorite
   } = offerDetail;
 
   const offerDetailPreview = {
@@ -95,7 +94,7 @@ export default function CardOffer() {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{title}</h1>
-                <BookmarkButton id={offerDetail.id} isActive={isFavorite} block={'offer'} size={'large'}/>
+                <BookmarkButton id={offerDetail.id} block={'offer'} size={'large'}/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

@@ -1,6 +1,7 @@
 import {getRatingStarsStyle} from '../../utils/utils.ts';
 import {OfferPreview} from '../../types/offer.ts';
 import {housing} from '../../const.ts';
+import {BookmarkButton} from '../bookmark-button/bookmark-button.tsx';
 
 type FavoriteCardProps = {
   offer: OfferPreview;
@@ -32,19 +33,7 @@ export default function FavoriteCard({offer}: FavoriteCardProps) {
                         /&nbsp;night
             </span>
           </div>
-          <button
-            className="place-card__bookmark-button place-card__bookmark-button--active button"
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
-            >
-              <use xlinkHref="#icon-bookmark"/>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <BookmarkButton id={offer.id} block={'place-card'}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

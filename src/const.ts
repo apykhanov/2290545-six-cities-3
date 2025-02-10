@@ -1,6 +1,3 @@
-export const Setting = {
-  cardCount: 6,
-};
 
 export enum AppRoute {
   Login = '/login',
@@ -8,7 +5,6 @@ export enum AppRoute {
   cardOffer = '/card-offer',
   Root = '/',
   NotFound = '/not-found',
-  Logout = '/logout',
 }
 
 export enum AuthorizationStatus {
@@ -63,7 +59,7 @@ export enum NameSpace {
 export const DEFAULT_CITY = 'Paris';
 export const DEFAULT_SORTING = 'Popular';
 
-export const MAX_STARS_RATING = 20;
+export const MAX_STARS_RATING = 5;
 
 export const MAX_COMMENTS_LENGTH = 300;
 export const MIN_COMMENTS_LENGTH = 50;

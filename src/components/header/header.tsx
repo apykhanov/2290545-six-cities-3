@@ -4,8 +4,8 @@ import {AppRoute} from '../../const.ts';
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {getIsAuth, getUser} from '../../store/user-process/selector.ts';
-import {logoutAction} from '../../store/api-actions.ts';
-import {Fragment, MouseEvent} from 'react';
+import {fetchFavoriteOffers, logoutAction} from '../../store/api-actions.ts';
+import {Fragment, MouseEvent, useEffect} from 'react';
 import {getFavorites} from '../../store/favorites/selector.ts';
 
 
@@ -24,6 +24,12 @@ export default function Header({withNav = true }: HeaderProps) {
     evt.preventDefault();
     dispatch(logoutAction());
   };
+
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(fetchFavoriteOffers());
+    }
+  }, [isAuth, dispatch]);
 
 
   return (

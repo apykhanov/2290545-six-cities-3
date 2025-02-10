@@ -1,8 +1,8 @@
 import { OfferPreview } from '../../types/offer.ts';
 import { RequestStatus } from '../../types/state.ts';
-import { NameSpace } from '../../const.ts';
+import { NameSpace} from '../../const.ts';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchFavoriteOffers, deleteFavorite, addFavorite } from '../api-actions.ts';
+import {fetchFavoriteOffers, deleteFavorite, addFavorite, logoutAction} from '../api-actions.ts';
 
 type FavoritesSlice = {
   favorites: OfferPreview[];
@@ -38,6 +38,9 @@ export const favoritesSlice = createSlice({
         state.favorites = state.favorites.filter(
           (offer) => offer.id !== updatedOffer.id
         );
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.favorites = [];
       });
   },
 });

@@ -49,7 +49,7 @@ export default function App() {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <Favorites />
             </PrivateRoute>
           }
