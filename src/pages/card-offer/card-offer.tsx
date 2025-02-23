@@ -18,10 +18,12 @@ import {getComments} from '../../store/comments/selector.ts';
 import Map from '../../components/map/map.tsx';
 import FullPageLoader from '../../components/full-page-loader/full-page-loader.tsx';
 import {BookmarkButton} from '../../components/bookmark-button/bookmark-button.tsx';
+import {getIsAuth} from '../../store/user-process/selector.ts';
 
 
 const MAX_NEAR_OFFERS_AMOUNT = 3;
 const MAX_IMAGES_AMOUNT = 6;
+const MAX_REVIEW_AMOUNT = 10;
 
 
 export default function CardOffer() {
@@ -31,6 +33,7 @@ export default function CardOffer() {
   const isOfferDetailLoading = useAppSelector(getOfferDataLoadingStatus);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const reviews = useAppSelector(getComments);
+  const isAuth = useAppSelector(getIsAuth);
 
 
   useEffect(() => {
@@ -153,11 +156,11 @@ export default function CardOffer() {
                 Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ul className="reviews__list">
-                  {reviews.map((review) => (
-                    <ReviewItem review={review} key={review.id} />
+                  {reviews.slice(0, MAX_REVIEW_AMOUNT).map((review) => (
+                    <ReviewItem review={review} key={review.id}/>
                   ))}
                 </ul>
-                <ReviewForm/>
+                {isAuth ? <ReviewForm/> : null}
               </section>
             </div>
           </div>

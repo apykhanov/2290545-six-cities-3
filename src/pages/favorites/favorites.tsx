@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hook/use-app-selector.tsx';
 import { getFavorites, getFavoritesLoadingStatus } from '../../store/favorites/selector.ts';
 import FullPageLoader from '../../components/full-page-loader/full-page-loader.tsx';
 
+
 export default function Favorites() {
   const favorites = useAppSelector(getFavorites);
   const isLoading = useAppSelector(getFavoritesLoadingStatus);
@@ -41,6 +42,7 @@ export default function Favorites() {
                 </div>
               </section>
             ) : (
+
               <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">
