@@ -3,8 +3,8 @@ import {OfferPreview} from '../types/offer.ts';
 import {Sorting} from '../types/sort.ts';
 
 export function getRatingStarsStyle(rating: number): string {
-  const percentage = (rating * 100) / MAX_STARS_RATING;
-  return `${Math.round(percentage)}%`;
+  const percentage = (Math.round(rating) * 100) / MAX_STARS_RATING;
+  return `${percentage}%`;
 }
 
 function sortByRating(a: OfferPreview, b: OfferPreview) {

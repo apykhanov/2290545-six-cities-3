@@ -156,7 +156,7 @@ export default function CardOffer() {
                 Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ul className="reviews__list">
-                  {reviews.slice(0, MAX_REVIEW_AMOUNT).map((review) => (
+                  {[...reviews].reverse().slice(0, MAX_REVIEW_AMOUNT).map((review) => (
                     <ReviewItem review={review} key={review.id}/>
                   ))}
                 </ul>
@@ -165,7 +165,9 @@ export default function CardOffer() {
             </div>
           </div>
           <section className="offer__map map">
-            <Map offers={[...nearbyOffers.slice(0, MAX_NEAR_OFFERS_AMOUNT), offerDetailPreview]} activeCardId={offerDetail.id} className="offer__map" />
+            <Map offers={[...nearbyOffers.slice(0, MAX_NEAR_OFFERS_AMOUNT), offerDetailPreview]} activeCardId={offerDetail.id}
+              className="offer__map"
+            />
           </section>
         </section>
         <div className="container">

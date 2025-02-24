@@ -42,7 +42,6 @@ export default function Favorites() {
                 </div>
               </section>
             ) : (
-
               <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">

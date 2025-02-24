@@ -45,9 +45,7 @@ export default function App() {
         <Route
           path={AppRoute.Login}
           element={
-            <PrivateRoute authorizationStatus={authorizationStatus}>
-              <Login />
-            </PrivateRoute>
+            <Login />
           }
         />
         <Route

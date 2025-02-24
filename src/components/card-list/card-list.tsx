@@ -4,15 +4,15 @@ import {OfferPreview} from '../../types/offer.ts';
 
 type CardListProps = {
   offers: OfferPreview[];
-  setActiveCard: (offer: OfferPreview) => void;
+  onCardHover: (offerId: OfferPreview['id'] | null) => void;
 };
 
-export default function CardList({offers, setActiveCard}: CardListProps) {
+export default function CardList({offers, onCardHover}: CardListProps) {
 
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <Card key={offer.id} offer={offer} setCurrentCard={setActiveCard} />
+        <Card key={offer.id} offer={offer} onCardHover={onCardHover} />
       ))}
     </div>
   );

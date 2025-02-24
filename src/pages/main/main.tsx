@@ -3,12 +3,12 @@ import Map from '../../components/map/map.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import Header from '../../components/header/header.tsx';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
-import {useActiveCard} from '../../hook/use-active-card.tsx';
 import PlaceSorting from '../../components/place-sorting/place-sorting.tsx';
 import {getOffers} from '../../store/offers/selector.ts';
 import {sorting} from '../../utils/utils.ts';
 import {getCurrentCity, getCurrentSort} from '../../store/app/selector.ts';
 import {MainEmpty} from '../main-empty/main-empty.tsx';
+import {useState} from 'react';
 
 
 export default function Main() {
@@ -18,11 +18,15 @@ export default function Main() {
   const currentSortType = useAppSelector(getCurrentSort);
   const sortedOffers = sorting[currentSortType](filteredOffers);
 
-  const {activeCard, setActiveCard} = useActiveCard();
+  const [activeCardId, setActiveCardId] = useState<string | null>(null);
 
-  if (offers.length === 0){
+  if (offers.length === 0) {
     return <MainEmpty location={currentCity}/>;
   }
+
+  const handleCardHover = (offerId: string | null) => {
+    setActiveCardId(offerId);
+  };
 
 
   return (
@@ -46,10 +50,10 @@ export default function Main() {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredOffers.length} places to stay in {currentCity}</b>
               <PlaceSorting activeSorting={currentSortType}/>
-              <CardList offers={sortedOffers} setActiveCard={setActiveCard}/>
+              <CardList offers={sortedOffers} onCardHover={handleCardHover}/>
             </section>
             <div className="cities__right-section">
-              <Map offers={filteredOffers} activeCardId={activeCard.id} className="cities__map"/>
+              <Map offers={filteredOffers} activeCardId={activeCardId} className="cities__map"/>
             </div>
           </div>
         </div>

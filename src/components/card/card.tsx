@@ -7,12 +7,13 @@ import {BookmarkButton} from '../bookmark-button/bookmark-button.tsx';
 
 type CardProps = {
   offer: OfferPreview;
-  setCurrentCard?: (offer: OfferPreview) => void;
+  onCardHover?: (offerId: OfferPreview['id'] | null) => void;
 };
 
-export default function Card({offer, setCurrentCard}: CardProps) {
+export default function Card({offer, onCardHover}: CardProps) {
   const {
     previewImage,
+    isPremium,
     title,
     type,
     rating,
@@ -21,18 +22,20 @@ export default function Card({offer, setCurrentCard}: CardProps) {
   } = offer;
 
   const handleCardOver = () => {
-    setCurrentCard?.(offer);
+    onCardHover?.(offer.id);
   };
 
   const handleCardLeave = () => {
-    setCurrentCard?.(offer);
+    onCardHover?.(null);
   };
 
   return (
     <article className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      )}
       <div
         className="cities__image-wrapper place-card__image-wrapper"
         onMouseOver={handleCardOver}

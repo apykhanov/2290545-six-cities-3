@@ -30,23 +30,24 @@ export default function ReviewForm(): JSX.Element {
     setRating(evt.target.value);
   }
 
-  const handleFormSubmit = async (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (!id) {
       toast.error('ID предложения не найден');
       return;
     }
-    try {
-      await dispatch(sendComment({
-        offerId: id,
-        comment: comment,
-        rating: Number(rating),
-      })).unwrap();
-      setRating('');
-      setComment('');
-    } catch {
-      toast.error('Комментарий не отправился');
-    }
+
+    dispatch(sendComment({
+      offerId: id,
+      comment: comment,
+      rating: Number(rating),
+    })).unwrap()
+      .then(() => {
+        setRating('');
+        setComment('');
+      }).catch(() => {
+        toast.error('Комментарий не отправился');
+      });
   };
 
   const isValidRating = ['1', '2', '3', '4', '5'].includes(rating);
