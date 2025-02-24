@@ -1,6 +1,5 @@
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
-import Spinner from '../../components/spinner/spinner.tsx';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import {
   getNearbyOffers,
@@ -17,10 +16,14 @@ import ReviewForm from '../../components/review-form/review-form.tsx';
 import Card from '../../components/card/card.tsx';
 import {getComments} from '../../store/comments/selector.ts';
 import Map from '../../components/map/map.tsx';
+import FullPageLoader from '../../components/full-page-loader/full-page-loader.tsx';
+import {BookmarkButton} from '../../components/bookmark-button/bookmark-button.tsx';
+import {getIsAuth} from '../../store/user-process/selector.ts';
 
 
 const MAX_NEAR_OFFERS_AMOUNT = 3;
 const MAX_IMAGES_AMOUNT = 6;
+const MAX_REVIEW_AMOUNT = 10;
 
 
 export default function CardOffer() {
@@ -30,6 +33,7 @@ export default function CardOffer() {
   const isOfferDetailLoading = useAppSelector(getOfferDataLoadingStatus);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const reviews = useAppSelector(getComments);
+  const isAuth = useAppSelector(getIsAuth);
 
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function CardOffer() {
   }, [dispatch, id]);
 
   if (isOfferDetailLoading || !offerDetail){
-    return <Spinner />;
+    return <FullPageLoader />;
   }
   const {
     images,
@@ -52,7 +56,7 @@ export default function CardOffer() {
     price,
     goods,
     host,
-    title
+    title,
   } = offerDetail;
 
   const offerDetailPreview = {
@@ -93,19 +97,14 @@ export default function CardOffer() {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{title}</h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark"/>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton id={offerDetail.id} block={'offer'} size={'large'}/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
                   <span style={{width: getRatingStarsStyle(rating)}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">{housing[type]}</li>
@@ -157,16 +156,18 @@ export default function CardOffer() {
                 Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ul className="reviews__list">
-                  {reviews.map((review) => (
-                    <ReviewItem review={review} key={review.id} />
+                  {[...reviews].reverse().slice(0, MAX_REVIEW_AMOUNT).map((review) => (
+                    <ReviewItem review={review} key={review.id}/>
                   ))}
                 </ul>
-                <ReviewForm/>
+                {isAuth ? <ReviewForm/> : null}
               </section>
             </div>
           </div>
           <section className="offer__map map">
-            <Map offers={[...nearbyOffers.slice(0, MAX_NEAR_OFFERS_AMOUNT), offerDetailPreview]} activeCardId={offerDetail.id} className="offer__map" />
+            <Map offers={[...nearbyOffers.slice(0, MAX_NEAR_OFFERS_AMOUNT), offerDetailPreview]} activeCardId={offerDetail.id}
+              className="offer__map"
+            />
           </section>
         </section>
         <div className="container">

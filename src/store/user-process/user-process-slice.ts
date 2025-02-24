@@ -1,6 +1,6 @@
 import {AuthorizationStatus, NameSpace} from '../../const.ts';
 import {createSlice} from '@reduxjs/toolkit';
-import {checkAuthAction, loginAction} from '../api-actions.ts';
+import {checkAuthAction, loginAction, logoutAction} from '../api-actions.ts';
 import {RequestStatus} from '../../types/state.ts';
 import {UserData} from '../../types/userData.ts';
 import {dropToken} from '../../services/token.ts';
@@ -34,9 +34,11 @@ export const userProcessSlice = createSlice({
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(checkAuthAction.rejected, (state) => {
+        state.user = null;
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.pending, (state) => {
+        state.user = null;
         state.loginStatus = RequestStatus.Loading;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
@@ -47,6 +49,10 @@ export const userProcessSlice = createSlice({
       .addCase(loginAction.rejected, (state) => {
         state.user = null;
         state.loginStatus = RequestStatus.Error;
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.user = null;
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       });
   }

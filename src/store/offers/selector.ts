@@ -20,5 +20,4 @@ export const getNearbyOffersLoadingStatus = (state : State) : boolean =>
 export const getOfferDetail = (state: State):OfferDetail | null =>
   state[NameSpace.Offers].offerDetail;
 
-export const getOfferDetailLoadingStatus = (state:State):boolean =>
-  state[NameSpace.Offers].isOfferDetailLoading;
+

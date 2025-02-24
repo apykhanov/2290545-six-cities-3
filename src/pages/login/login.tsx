@@ -2,9 +2,11 @@ import {FormEvent, useRef} from 'react';
 import {useAppDispatch} from '../../hook/use-app-dispatch.tsx';
 import {loginAction} from '../../store/api-actions.ts';
 import {toast} from 'react-toastify';
-import {getLoginRequestLoading} from '../../store/user-process/selector.ts';
+import {getIsAuth, getLoginRequestLoading} from '../../store/user-process/selector.ts';
 import {useAppSelector} from '../../hook/use-app-selector.tsx';
 import Header from '../../components/header/header.tsx';
+import {Navigate} from 'react-router-dom';
+import {AppRoute} from '../../const.ts';
 
 
 export default function Login() {
@@ -12,6 +14,11 @@ export default function Login() {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const isLoading = useAppSelector(getLoginRequestLoading);
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getIsAuth);
+
+  if (isAuth) {
+    return <Navigate to={AppRoute.Root} />;
+  }
 
   function validatePassword() {
     const re = /^(?=.*[a-zA-Z])(?=.*\d).{2,}$/;

@@ -13,6 +13,7 @@ export default function CitiesList({currentCity}: CitiesListProps) {
   const handleCityChange = (city: string) => {
     dispatch(changeCity(city));
   };
+
   return (
     <ul className="locations__list tabs__list">
       {Cities.map((city) => (

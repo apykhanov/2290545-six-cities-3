@@ -6,10 +6,11 @@ import 'leaflet/dist/leaflet.css';
 
 const URL_MARKER_DEFAULT = 'img/pin.svg';
 const URL_MARKER_CURRENT = 'img/pin-active.svg';
+const ZOOM_DEFAULT = 13;
 
 
 type MapProps = {
-  activeCardId: OfferPreview['id'];
+  activeCardId: OfferPreview['id'] | null;
   offers: OfferPreview[];
   className: string;
 };
@@ -52,16 +53,15 @@ export default function Map({ offers, activeCardId, className}: MapProps) {
     }
   }, [map, offers, activeCardId]);
 
+  useEffect(() => {
+    if (map) {
+      map.setView([offers[0].location.latitude, offers[0].location.longitude], ZOOM_DEFAULT);
+    }
+  }, [offers, map]);
+
 
   return (
     <section
-      style={{
-        // height: '100%',
-        // minHeight: '500px',
-        // width: '100%',
-        // maxWidth: '1144px',
-        // margin: '0 auto',
-      }}
       className={`${className} map`}
       ref={mapRef}
     >
